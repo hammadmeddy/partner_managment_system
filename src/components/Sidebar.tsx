@@ -21,7 +21,6 @@ interface SidebarProps {
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const location = useLocation();
   const { pathname } = location;
-  const [darkMode, setDarkMode] = useState(true);
   const trigger = useRef<any>(null);
   const sidebar = useRef<any>(null);
   // const isAdmin = useSelector((state) => state.isAdmin?.isAdmin?.is_admin);
@@ -40,10 +39,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     dispatch(logout());
   };
 
-  useEffect(() => {
-    setDarkMode(localStorage.getItem("color-theme") === "dark");
-  }, [darkMode]);
-  console.log(darkMode);
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -58,6 +53,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     };
     document.addEventListener("click", clickHandler);
     return () => document.removeEventListener("click", clickHandler);
+  });
+
+  // close if the esc key is pressed
+  useEffect(() => {
+    const keyHandler = ({ keyCode }: KeyboardEvent) => {
+      if (!sidebarOpen || keyCode !== 27) return;
+      setSidebarOpen(false);
+    };
+    document.addEventListener("keydown", keyHandler);
+    return () => document.removeEventListener("keydown", keyHandler);
   });
 
   useEffect(() => {
@@ -94,7 +99,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           className="block text-black lg:hidden"
         >
           <svg
-            className="fill-black"
+            className="fill-[#ECE9E9]"
             width="20"
             height="18"
             viewBox="0 0 20 18"
@@ -204,6 +209,21 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Estimates
                             </NavLink>
                           </li>
+                          {/* <li onClick={() => handleLinkClick("New Estimates")}>
+                            <NavLink
+                              to="/sales/newestimates"
+                              className={({ isActive }) =>
+                                `group relative flex items-center gap-[4px] rounded-sm py-3 px-4 text-sm font-semibold duration-100 ease-in-out ${
+                                  isActive
+                                    ? "bg-white/20 rounded-xl text-white"
+                                    : "text-[#ECE9E9]"
+                                }`
+                              }
+                            >
+                              <img src={estimates} alt="" />
+                              New Estimates
+                            </NavLink>
+                          </li> */}
                           <li onClick={() => handleLinkClick("Invoices")}>
                             <NavLink
                               to="/sales/invoices"

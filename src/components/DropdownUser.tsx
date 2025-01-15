@@ -5,6 +5,7 @@ import { logout } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import user from "../images/user.png";
 import { useAppDispatch } from "../hooks/hooks";
+import React from "react";
 import { setTitle } from "../redux/slices/titleSlice";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 const DropdownUser = () => {

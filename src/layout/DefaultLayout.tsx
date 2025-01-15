@@ -1,8 +1,10 @@
 import { useState } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Footer from "../components/Footer";
 
 const DefaultLayout = () => {
   //const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -13,7 +15,7 @@ const DefaultLayout = () => {
       {/* {!userIsLoggedIn && <SignIn/>} */}
 
       {/* <!-- ===== Page Wrapper Start ===== --> */}
-      <div className="bg-grey-100 flex h-screen overflow-hidden ">
+      <div className="flex h-screen overflow-hidden bg-[#F4F8FF]  ">
         {/* <!-- ===== Sidebar Start ===== --> */}
         {isAuthenticated && (
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -22,7 +24,7 @@ const DefaultLayout = () => {
         {/* <!-- ===== Sidebar End ===== --> */}
 
         {/* <!-- ===== Content Area Start ===== --> */}
-        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-[#F2F2F2] ">
+        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-[#F4F8FF] ">
           {/* <!-- ===== Header Start ===== --> */}
           {isAuthenticated && (
             <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -32,7 +34,7 @@ const DefaultLayout = () => {
 
           {/* <!-- ===== Main Content Start ===== --> */}
           <main>
-            <div className="mx-auto ml-16 max-w-screen-2xl p-3.5 lg:ml-0 2xl:p-8">
+            <div className="mx-auto max-w-screen-2xl p-4 md:p-8 2xl:p-8">
               <Outlet />
             </div>
           </main>

@@ -13,13 +13,19 @@ import SignIn from "./pages/Authentication/SignIn";
 import Loader from "./common/Loader";
 import PageTitle from "./components/PageTitle";
 import { useDispatch } from "react-redux";
-
+import Estimates from "./components/Estimates/Estimates";
 import ForgetPassword from "./pages/Authentication/ForgetPassword";
 import SignUp from "./pages/Authentication/SignUp";
 import TwoFA from "./pages/Authentication/TwoFA";
 import NewPassword from "./pages/Authentication/NewPassword";
 import Login from "./pages/Authentication/SignIn";
 import { useSelector } from "react-redux";
+import Footer from "./components/Estimates/Footer";
+import FileUploader from "./components/FileUploader";
+import Attachments from "./components/Estimates/Attachments";
+import NewEstimates from "./components/Estimates/NewEstimates";
+import Invoices from "./components/Invoices/Invoices";
+import AllCustomers from "./components/Customers/AllCustomers";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -65,19 +71,11 @@ function App() {
               />
 
               <Route
-                path="/sales"
-                element={
-                  <>
-                    <PageTitle title="Sales" />
-                  </>
-                }
-              />
-
-              <Route
                 path="/sales/estimates"
                 element={
                   <>
                     <PageTitle title="Estimates" />
+                    <Estimates />
                   </>
                 }
               />
@@ -87,6 +85,17 @@ function App() {
                 element={
                   <>
                     <PageTitle title="Invoices" />
+                    <Invoices />
+                  </>
+                }
+              />
+
+              <Route
+                path="sales/newestimates"
+                element={
+                  <>
+                    <PageTitle title="New Estimates" />
+                    <NewEstimates />
                   </>
                 }
               />
@@ -96,6 +105,7 @@ function App() {
                 element={
                   <>
                     <PageTitle title="Customers" />
+                    <AllCustomers />
                   </>
                 }
               />

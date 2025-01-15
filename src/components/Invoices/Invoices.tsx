@@ -3,13 +3,13 @@ import data from "../../utils/data.json";
 import action from "../../images/action.png";
 import arrows from "../../images/arrows.png";
 import Filter from "../../components/Filter";
-import ButtonGroup from "./ButtonGroup";
 import SelectedFilters from "../SelectedFilters";
 import Pagination from "../Pagination";
-import ButtonGroup2 from "./ButtonGroup2";
-import { handleFilterChange } from "../../utils/global funtions/filter";
+import ButtonGroup3 from "./ButtonGroup3";
+import ButtonGroup4 from "./ButtonGroup4";
+import InvoiceDashboard from "./InvoiceDashboard";
 
-const Estimates = () => {
+const Invoices = () => {
   const [filter, setFilter] = useState("All");
 
   // Handle clicks for active tabs
@@ -76,15 +76,46 @@ const Estimates = () => {
     "Number",
     "Status",
     "Customer",
-    "Amount",
+    "Amount Due",
     "Actions",
   ];
 
   // Filter function that updates the filtered data based on input
+  const handleFilterChange = () => {
+    let filtered = data;
+    if (fromDate) {
+      filtered = filtered.filter(
+        (item) => new Date(item.date) >= new Date(fromDate)
+      );
+    }
+    if (toDate) {
+      filtered = filtered.filter(
+        (item) => new Date(item.date) <= new Date(toDate)
+      );
+    }
+    if (status) {
+      filtered = filtered.filter((item) => item.status === status);
+    }
+    setFilteredData(filtered);
+    //setCurrentPage(1); // Reset pagination to the first page
+  };
 
   const handleApplyFilter = () => {
-    handleFilterChange({ fromDate, toDate, status, setFilteredData, data });
+    handleFilterChange();
     closeModal(); // Close modal after applying filters
+  };
+
+  const handleFilterRemove = (filterLabel) => {
+    if (filterLabel === "From") {
+      setFromDate(initialFromDate);
+    }
+    if (filterLabel === "To") {
+      setToDate(initialToDate);
+    }
+    if (filterLabel === "Status") {
+      setStatus(initialStatus);
+    }
+    handleFilterChange(); // Reset data to original state without any filtering
   };
 
   // Toggle modal visibility
@@ -115,32 +146,29 @@ const Estimates = () => {
 
   return (
     <>
-      <ButtonGroup2
+      <ButtonGroup3
         onAllClick={handleAllClick}
         onActiveClick={handleActiveClick}
         onDraftClick={handleDraftClick}
       />
-      <div className="rounded-xl bg-[#FFFFFF] border-[1px] border-[#ECE9E9] py-6 px-3">
+      <InvoiceDashboard />
+
+      <div className="rounded-xl bg-[#FFFFFF] border-[1px] mt-2 border-[#ECE9E9] py-6 px-3">
         <div className="flex flex-col md:flex-row items-center justify-between px-2">
           <span className="pb-3 text-[#242E3E] font-bold text-base">
-            {filter} Estimates
+            {filter} Invoices
           </span>
           <span>
             <div className="flex justify-end gap-2 items-center">
               <div className="hidden sm:flex flex-wrap gap-2">
                 <SelectedFilters
                   selectedFilters={selectedFilters}
-                  setFromDate={setFromDate}
-                  setToDate={setToDate}
-                  setStatus={setStatus}
-                  initialFromDate={initialFromDate}
-                  initialToDate={initialToDate}
-                  initialStatus={initialStatus}
+                  handleFilterRemove={handleFilterRemove}
                 />
               </div>
 
               {/* Button Group */}
-              <ButtonGroup
+              <ButtonGroup4
                 openModal={openModal}
                 activeFiltersCount={activeFiltersCount}
               />
@@ -166,12 +194,7 @@ const Estimates = () => {
         <div className="sm:hidden mt-4">
           <SelectedFilters
             selectedFilters={selectedFilters}
-            setFromDate={setFromDate}
-            setToDate={setToDate}
-            setStatus={setStatus}
-            initialFromDate={initialFromDate}
-            initialToDate={initialToDate}
-            initialStatus={initialStatus}
+            handleFilterRemove={handleFilterRemove}
           />
         </div>
 
@@ -221,7 +244,7 @@ const Estimates = () => {
               </div>
               <div className="flex items-center justify-start px-3 py-4">
                 <p className="text-sm text-[#242E3E] font-normal">
-                  {item?.amount}
+                  {item?.amountdue}
                 </p>
               </div>
               <div className="flex items-center justify-start px-3 py-4">
@@ -243,4 +266,4 @@ const Estimates = () => {
   );
 };
 
-export default Estimates;
+export default Invoices;
