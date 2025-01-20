@@ -5,9 +5,14 @@ import arrows from "../../images/arrows.png";
 import Filter from "../../components/Filter";
 import ButtonGroup from "./ButtonGroup";
 import SelectedFilters from "../SelectedFilters";
-import Pagination from "../Pagination";
 import ButtonGroup2 from "./ButtonGroup2";
-import { handleFilterChange } from "../../utils/global funtions/filter";
+import { getStatusStyle } from "../../utils/global funtions/statusstyle";
+import { formatDate } from "../../utils/global funtions/dateformat";
+import { estimateheadings } from "../../utils/global funtions/headings";
+import { activeFiltersCount } from "../../utils/global funtions/filter";
+import { handleApplyFilter } from "../../utils/global funtions/filter";
+import { getSelectedFilters } from "../../utils/global funtions/filter";
+import Pagination from "../Pagination";
 
 const Estimates = () => {
   const [filter, setFilter] = useState("All");
@@ -32,7 +37,12 @@ const Estimates = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [displayedRows, setDisplayedRows] = useState([]);
 
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  const selectedFilters = getSelectedFilters({
+    fromDate,
+    toDate,
+    status,
+    formatDate,
+  });
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * rowsPerPage;
@@ -40,78 +50,10 @@ const Estimates = () => {
     setDisplayedRows(filteredData.slice(startIndex, endIndex));
   }, [rowsPerPage, currentPage, filteredData]);
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-  const handleRowsPerPageChange = (e) => {
-    const newRowsPerPage = parseInt(e.target.value, 10);
-    const maxPage = Math.ceil(filteredData.length / newRowsPerPage) || 1;
-    setRowsPerPage(newRowsPerPage);
-    setCurrentPage((prevPage) => Math.min(prevPage, maxPage));
-  };
-
-  // Calculate the number of active filters
-  const activeFiltersCount =
-    (fromDate ? 1 : 0) + (toDate ? 1 : 0) + (status ? 1 : 0);
-
-  // For styling statuses
-  const getStatusStyle = (status) => {
-    if (status === "Completed") {
-      return { backgroundColor: "#E9FAF0", color: "#1FCD67" };
-    }
-    if (status === "Pending") {
-      return { backgroundColor: "#FFF9E9", color: "#FBBF24" };
-    }
-    if (status === "Failed") {
-      return { backgroundColor: "#FEEAEA", color: "#F23030" };
-    }
-    return {};
-  };
-
-  const headings = [
-    "Date",
-    "Number",
-    "Status",
-    "Customer",
-    "Amount",
-    "Actions",
-  ];
-
-  // Filter function that updates the filtered data based on input
-
-  const handleApplyFilter = () => {
-    handleFilterChange({ fromDate, toDate, status, setFilteredData, data });
-    closeModal(); // Close modal after applying filters
-  };
-
-  // Toggle modal visibility
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  // Function to format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-
-    // Using Intl.DateTimeFormat to format the date
-    const options = { day: "2-digit", month: "long", year: "numeric" };
-    const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
-      date
-    );
-
-    return formattedDate;
-  };
-
-  // Displays selected filters
-  const selectedFilters = [];
-  if (fromDate)
-    selectedFilters.push({ label: "From", value: formatDate(fromDate) });
-  if (toDate) selectedFilters.push({ label: "To", value: formatDate(toDate) });
-  if (status) selectedFilters.push({ label: "Status", value: status });
 
   return (
     <>
@@ -138,13 +80,15 @@ const Estimates = () => {
                   initialStatus={initialStatus}
                 />
               </div>
-
               {/* Button Group */}
               <ButtonGroup
                 openModal={openModal}
-                activeFiltersCount={activeFiltersCount}
+                activeFiltersCount={activeFiltersCount({
+                  fromDate,
+                  toDate,
+                  status,
+                })}
               />
-
               {/* Filter Modal,filter states and handler */}
               {isModalOpen && (
                 <Filter
@@ -154,7 +98,16 @@ const Estimates = () => {
                   setFromDate={setFromDate}
                   setToDate={setToDate}
                   setStatus={setStatus}
-                  applyFilter={handleApplyFilter}
+                  applyFilter={() =>
+                    handleApplyFilter({
+                      fromDate,
+                      toDate,
+                      status,
+                      setFilteredData,
+                      data,
+                      closeModal,
+                    })
+                  }
                   closeModal={closeModal}
                 />
               )}
@@ -174,17 +127,16 @@ const Estimates = () => {
             initialStatus={initialStatus}
           />
         </div>
-
         <div className="overflow-x-auto bg-[#FFFFFF]">
           <div className="min-w-[900px] grid grid-cols-6 border-b border-stroke">
-            {headings.map((heading, index) => (
+            {estimateheadings.map((heading, index) => (
               <div
                 key={index}
                 className="flex items-center px-3 py-4 text-[#595959]"
               >
                 <p className="text-xs gap-1 font-bold flex items-center">
                   {heading}
-                  <img src={arrows} alt="" />
+                  <img src={arrows} alt="Arrow icon" />
                 </p>
               </div>
             ))}
@@ -209,7 +161,7 @@ const Estimates = () => {
               <div className="flex items-center justify-start px-3 py-4">
                 <span
                   className="px-3 py-1 rounded text-sm font-bold"
-                  style={getStatusStyle(item.status)}
+                  style={getStatusStyle(item?.status)}
                 >
                   {item?.status}
                 </span>
@@ -230,13 +182,13 @@ const Estimates = () => {
             </div>
           ))}
         </div>
-
         <Pagination
+          data={filteredData}
           currentPage={currentPage}
-          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
           rowsPerPage={rowsPerPage}
-          handlePageChange={handlePageChange}
-          handleRowsPerPageChange={handleRowsPerPageChange}
+          setRowsPerPage={setRowsPerPage}
+          setDisplayedRows={setDisplayedRows}
         />
       </div>
     </>

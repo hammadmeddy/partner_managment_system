@@ -19,13 +19,11 @@ import SignUp from "./pages/Authentication/SignUp";
 import TwoFA from "./pages/Authentication/TwoFA";
 import NewPassword from "./pages/Authentication/NewPassword";
 import Login from "./pages/Authentication/SignIn";
-import { useSelector } from "react-redux";
-import Footer from "./components/Estimates/Footer";
-import FileUploader from "./components/FileUploader";
-import Attachments from "./components/Estimates/Attachments";
 import NewEstimates from "./components/Estimates/NewEstimates";
 import Invoices from "./components/Invoices/Invoices";
 import AllCustomers from "./components/Customers/AllCustomers";
+import AddCustomers from "./components/Customers/AddCustomers";
+import NewCustomer from "./components/Customers/NewCustomer";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -91,7 +89,7 @@ function App() {
               />
 
               <Route
-                path="sales/newestimates"
+                path="/newestimates"
                 element={
                   <>
                     <PageTitle title="New Estimates" />
@@ -106,6 +104,16 @@ function App() {
                   <>
                     <PageTitle title="Customers" />
                     <AllCustomers />
+                  </>
+                }
+              />
+
+              <Route
+                path="/newcustomer"
+                element={
+                  <>
+                    <PageTitle title="New Customer" />
+                    <NewCustomer />
                   </>
                 }
               />

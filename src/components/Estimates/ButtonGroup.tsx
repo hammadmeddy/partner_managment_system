@@ -2,8 +2,13 @@ import React from "react";
 import DynamicButton from "../DynamicButton";
 import filter from "../../images/filter.png";
 import estimates from "../../images/estimates.png";
+import { useNavigate } from "react-router-dom";
 
 const ButtonGroup = ({ openModal, activeFiltersCount }) => {
+  const navigate = useNavigate();
+  const handleNavigate = () => {
+    navigate("/newestimates");
+  };
   return (
     <div className="flex justify-end gap-4 mb-4">
       {/* Filter Button */}
@@ -24,7 +29,7 @@ const ButtonGroup = ({ openModal, activeFiltersCount }) => {
 
       {/* Create Estimate Button */}
       <DynamicButton
-        onClick=""
+        onClick={handleNavigate}
         name="Create Estimate"
         type="submit"
         className="text-white inline-flex justify-center items-center"

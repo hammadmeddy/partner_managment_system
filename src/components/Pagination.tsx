@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Pagination = ({
+  data,
   currentPage,
-  totalPages,
+  setCurrentPage,
   rowsPerPage,
-  handlePageChange,
-  handleRowsPerPageChange,
+  setRowsPerPage,
+  setDisplayedRows,
 }) => {
+  const totalPages = Math.ceil(data.length / rowsPerPage);
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    setDisplayedRows(data.slice(startIndex, endIndex));
+  }, [rowsPerPage, currentPage, data, setDisplayedRows]);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  const handleRowsPerPageChange = (e) => {
+    const newRowsPerPage = parseInt(e.target.value, 10);
+    const maxPage = Math.ceil(data.length / newRowsPerPage) || 1;
+    setRowsPerPage(newRowsPerPage);
+    setCurrentPage((prevPage) => Math.min(prevPage, maxPage));
+  };
+
   const renderPageNumbers = () => {
     const pages = [];
-
     // Always show the first page
     pages.push(
       <button

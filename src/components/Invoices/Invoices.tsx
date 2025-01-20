@@ -8,11 +8,16 @@ import Pagination from "../Pagination";
 import ButtonGroup3 from "./ButtonGroup3";
 import ButtonGroup4 from "./ButtonGroup4";
 import InvoiceDashboard from "./InvoiceDashboard";
+import { invoicesheadings } from "../../utils/global funtions/headings";
+import { getStatusStyle } from "../../utils/global funtions/statusstyle";
+import { formatDate } from "../../utils/global funtions/dateformat";
+import { activeFiltersCount } from "../../utils/global funtions/filter";
+import { handleApplyFilter } from "../../utils/global funtions/filter";
+import { getSelectedFilters } from "../../utils/global funtions/filter";
 
 const Invoices = () => {
   const [filter, setFilter] = useState("All");
 
-  // Handle clicks for active tabs
   const handleAllClick = () => setFilter("All");
   const handleActiveClick = () => setFilter("Active");
   const handleDraftClick = () => setFilter("Draft");
@@ -32,7 +37,12 @@ const Invoices = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [displayedRows, setDisplayedRows] = useState([]);
 
-  const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+  const selectedFilters = getSelectedFilters({
+    fromDate,
+    toDate,
+    status,
+    formatDate,
+  });
 
   useEffect(() => {
     const startIndex = (currentPage - 1) * rowsPerPage;
@@ -40,109 +50,10 @@ const Invoices = () => {
     setDisplayedRows(filteredData.slice(startIndex, endIndex));
   }, [rowsPerPage, currentPage, filteredData]);
 
-  const handlePageChange = (page) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
-  const handleRowsPerPageChange = (e) => {
-    const newRowsPerPage = parseInt(e.target.value, 10);
-    const maxPage = Math.ceil(filteredData.length / newRowsPerPage) || 1;
-    setRowsPerPage(newRowsPerPage);
-    setCurrentPage((prevPage) => Math.min(prevPage, maxPage));
-  };
-
-  // Calculate the number of active filters
-  const activeFiltersCount =
-    (fromDate ? 1 : 0) + (toDate ? 1 : 0) + (status ? 1 : 0);
-
-  // For styling statuses
-  const getStatusStyle = (status) => {
-    if (status === "Completed") {
-      return { backgroundColor: "#E9FAF0", color: "#1FCD67" };
-    }
-    if (status === "Pending") {
-      return { backgroundColor: "#FFF9E9", color: "#FBBF24" };
-    }
-    if (status === "Failed") {
-      return { backgroundColor: "#FEEAEA", color: "#F23030" };
-    }
-    return {};
-  };
-
-  const headings = [
-    "Date",
-    "Number",
-    "Status",
-    "Customer",
-    "Amount Due",
-    "Actions",
-  ];
-
-  // Filter function that updates the filtered data based on input
-  const handleFilterChange = () => {
-    let filtered = data;
-    if (fromDate) {
-      filtered = filtered.filter(
-        (item) => new Date(item.date) >= new Date(fromDate)
-      );
-    }
-    if (toDate) {
-      filtered = filtered.filter(
-        (item) => new Date(item.date) <= new Date(toDate)
-      );
-    }
-    if (status) {
-      filtered = filtered.filter((item) => item.status === status);
-    }
-    setFilteredData(filtered);
-    //setCurrentPage(1); // Reset pagination to the first page
-  };
-
-  const handleApplyFilter = () => {
-    handleFilterChange();
-    closeModal(); // Close modal after applying filters
-  };
-
-  const handleFilterRemove = (filterLabel) => {
-    if (filterLabel === "From") {
-      setFromDate(initialFromDate);
-    }
-    if (filterLabel === "To") {
-      setToDate(initialToDate);
-    }
-    if (filterLabel === "Status") {
-      setStatus(initialStatus);
-    }
-    handleFilterChange(); // Reset data to original state without any filtering
-  };
-
-  // Toggle modal visibility
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
     setIsModalOpen(false);
   };
-
-  // Function to format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-
-    // Using Intl.DateTimeFormat to format the date
-    const options = { day: "2-digit", month: "long", year: "numeric" };
-    const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
-      date
-    );
-
-    return formattedDate;
-  };
-
-  // Displays selected filters
-  const selectedFilters = [];
-  if (fromDate)
-    selectedFilters.push({ label: "From", value: formatDate(fromDate) });
-  if (toDate) selectedFilters.push({ label: "To", value: formatDate(toDate) });
-  if (status) selectedFilters.push({ label: "Status", value: status });
 
   return (
     <>
@@ -152,7 +63,6 @@ const Invoices = () => {
         onDraftClick={handleDraftClick}
       />
       <InvoiceDashboard />
-
       <div className="rounded-xl bg-[#FFFFFF] border-[1px] mt-2 border-[#ECE9E9] py-6 px-3">
         <div className="flex flex-col md:flex-row items-center justify-between px-2">
           <span className="pb-3 text-[#242E3E] font-bold text-base">
@@ -163,14 +73,23 @@ const Invoices = () => {
               <div className="hidden sm:flex flex-wrap gap-2">
                 <SelectedFilters
                   selectedFilters={selectedFilters}
-                  handleFilterRemove={handleFilterRemove}
+                  setFromDate={setFromDate}
+                  setToDate={setToDate}
+                  setStatus={setStatus}
+                  initialFromDate={initialFromDate}
+                  initialToDate={initialToDate}
+                  initialStatus={initialStatus}
                 />
               </div>
 
               {/* Button Group */}
               <ButtonGroup4
                 openModal={openModal}
-                activeFiltersCount={activeFiltersCount}
+                activeFiltersCount={activeFiltersCount({
+                  fromDate,
+                  toDate,
+                  status,
+                })}
               />
 
               {/* Filter Modal,filter states and handler */}
@@ -182,7 +101,16 @@ const Invoices = () => {
                   setFromDate={setFromDate}
                   setToDate={setToDate}
                   setStatus={setStatus}
-                  applyFilter={handleApplyFilter}
+                  applyFilter={() =>
+                    handleApplyFilter({
+                      fromDate,
+                      toDate,
+                      status,
+                      setFilteredData,
+                      data,
+                      closeModal,
+                    })
+                  }
                   closeModal={closeModal}
                 />
               )}
@@ -194,13 +122,18 @@ const Invoices = () => {
         <div className="sm:hidden mt-4">
           <SelectedFilters
             selectedFilters={selectedFilters}
-            handleFilterRemove={handleFilterRemove}
+            setFromDate={setFromDate}
+            setToDate={setToDate}
+            setStatus={setStatus}
+            initialFromDate={initialFromDate}
+            initialToDate={initialToDate}
+            initialStatus={initialStatus}
           />
         </div>
 
         <div className="overflow-x-auto bg-[#FFFFFF]">
           <div className="min-w-[900px] grid grid-cols-6 border-b border-stroke">
-            {headings.map((heading, index) => (
+            {invoicesheadings.map((heading, index) => (
               <div
                 key={index}
                 className="flex items-center px-3 py-4 text-[#595959]"
@@ -253,13 +186,13 @@ const Invoices = () => {
             </div>
           ))}
         </div>
-
         <Pagination
+          data={filteredData}
           currentPage={currentPage}
-          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
           rowsPerPage={rowsPerPage}
-          handlePageChange={handlePageChange}
-          handleRowsPerPageChange={handleRowsPerPageChange}
+          setRowsPerPage={setRowsPerPage}
+          setDisplayedRows={setDisplayedRows}
         />
       </div>
     </>
