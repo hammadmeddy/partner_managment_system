@@ -44,7 +44,7 @@ const AllCustomers = () => {
         <span className="pb-3 text-[#242E3E] font-bold text-base">
           All Customers
         </span>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col md:flex-row items-center gap-2">
           <div className="flex items-center border-[1px] border-[#ECE9E9] w-[264px] bg-white rounded-lg py-1">
             <DynamicButton
               onClick={handleSearch}
