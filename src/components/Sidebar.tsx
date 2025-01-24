@@ -209,21 +209,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               Estimates
                             </NavLink>
                           </li>
-                          {/* <li onClick={() => handleLinkClick("New Estimates")}>
-                            <NavLink
-                              to="/sales/newestimates"
-                              className={({ isActive }) =>
-                                `group relative flex items-center gap-[4px] rounded-sm py-3 px-4 text-sm font-semibold duration-100 ease-in-out ${
-                                  isActive
-                                    ? "bg-white/20 rounded-xl text-white"
-                                    : "text-[#ECE9E9]"
-                                }`
-                              }
-                            >
-                              <img src={estimates} alt="" />
-                              New Estimates
-                            </NavLink>
-                          </li> */}
                           <li onClick={() => handleLinkClick("Invoices")}>
                             <NavLink
                               to="/sales/invoices"

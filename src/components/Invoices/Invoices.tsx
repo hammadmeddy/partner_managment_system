@@ -95,6 +95,7 @@ const Invoices = () => {
               {/* Filter Modal,filter states and handler */}
               {isModalOpen && (
                 <Filter
+                  filters={["fromDate", "toDate", "status"]}
                   fromDate={fromDate}
                   toDate={toDate}
                   status={status}

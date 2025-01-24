@@ -3,53 +3,48 @@ import data from "../../utils/data.json";
 import action from "../../images/action.png";
 import arrows from "../../images/arrows.png";
 import Filter from "../../components/Filter";
-import ButtonGroup from "./ButtonGroup";
 import SelectedFilters from "../SelectedFilters";
-import ButtonGroup2 from "./ButtonGroup2";
-import { getStatusStyle } from "../../utils/global funtions/statusstyle";
+import { getStatusStyle2 } from "../../utils/global funtions/statusstyle";
 import { formatDate } from "../../utils/global funtions/dateformat";
-import { estimateheadings } from "../../utils/global funtions/headings";
+import { billsheadings } from "../../utils/global funtions/headings";
 import { activeFiltersCount } from "../../utils/global funtions/filter";
 import { handleApplyFilter } from "../../utils/global funtions/filter";
 import { getSelectedFilters } from "../../utils/global funtions/filter";
 import Pagination from "../Pagination";
+import ButtonGroup5 from "./ButtonGroup5";
 
-const Estimates = () => {
-  const [filter, setFilter] = useState("All");
-
-  // Handle clicks for active tabs
-  const handleAllClick = () => setFilter("All");
-  const handleActiveClick = () => setFilter("Active");
-  const handleDraftClick = () => setFilter("Draft");
-
+const AllBills = () => {
   // Initial state for filter values
   const initialFromDate = "";
   const initialToDate = "";
-  const initialStatus = "";
+  const initialVendor = "";
 
   // State for filter values
   const [fromDate, setFromDate] = useState(initialFromDate);
   const [toDate, setToDate] = useState(initialToDate);
-  const [status, setStatus] = useState(initialStatus);
+  const [vendor, setVendor] = useState(initialVendor);
   const [filteredData, setFilteredData] = useState(data);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [displayedRows, setDisplayedRows] = useState([]);
 
+  // Get selected filters for display
   const selectedFilters = getSelectedFilters({
     fromDate,
     toDate,
-    status,
+    vendor,
     formatDate,
   });
 
+  // Paginate the data when filteredData or page changes
   useEffect(() => {
     const startIndex = (currentPage - 1) * rowsPerPage;
     const endIndex = startIndex + rowsPerPage;
     setDisplayedRows(filteredData.slice(startIndex, endIndex));
   }, [rowsPerPage, currentPage, filteredData]);
 
+  // Open and close modal handlers
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
     setIsModalOpen(false);
@@ -57,15 +52,10 @@ const Estimates = () => {
 
   return (
     <>
-      <ButtonGroup2
-        onAllClick={handleAllClick}
-        onActiveClick={handleActiveClick}
-        onDraftClick={handleDraftClick}
-      />
       <div className="rounded-xl bg-[#FFFFFF] border-[1px] border-[#ECE9E9] py-6 px-3">
         <div className="flex flex-col md:flex-row items-center justify-between px-2">
           <span className="pb-3 text-[#242E3E] font-bold text-base">
-            {filter} Estimates
+            All Bills
           </span>
           <span>
             <div className="flex justify-end gap-2 items-center">
@@ -74,36 +64,35 @@ const Estimates = () => {
                   selectedFilters={selectedFilters}
                   setFromDate={setFromDate}
                   setToDate={setToDate}
-                  setStatus={setStatus}
+                  setVendor={setVendor}
                   initialFromDate={initialFromDate}
                   initialToDate={initialToDate}
-                  initialStatus={initialStatus}
+                  initialVendor={initialVendor}
                 />
               </div>
               {/* Button Group */}
-              <ButtonGroup
+              <ButtonGroup5
                 openModal={openModal}
                 activeFiltersCount={activeFiltersCount({
                   fromDate,
                   toDate,
-                  status,
+                  vendor,
                 })}
               />
-              {/* Filter Modal,filter states and handler */}
+              {/* Filter Modal */}
               {isModalOpen && (
                 <Filter
-                  filters={["fromDate", "toDate", "status"]}
+                  filters={["fromDate", "toDate", "vendor"]}
                   fromDate={fromDate}
                   toDate={toDate}
-                  status={status}
                   setFromDate={setFromDate}
                   setToDate={setToDate}
-                  setStatus={setStatus}
+                  setVendor={setVendor}
                   applyFilter={() =>
                     handleApplyFilter({
                       fromDate,
                       toDate,
-                      status,
+                      vendor,
                       setFilteredData,
                       data,
                       closeModal,
@@ -122,15 +111,15 @@ const Estimates = () => {
             selectedFilters={selectedFilters}
             setFromDate={setFromDate}
             setToDate={setToDate}
-            setStatus={setStatus}
+            setVendor={setVendor}
             initialFromDate={initialFromDate}
             initialToDate={initialToDate}
-            initialStatus={initialStatus}
+            initialVendor={initialVendor}
           />
         </div>
         <div className="overflow-x-auto bg-[#FFFFFF]">
-          <div className="min-w-[900px] grid grid-cols-6 border-b border-stroke">
-            {estimateheadings.map((heading, index) => (
+          <div className="min-w-[900px] grid grid-cols-7 border-b border-stroke">
+            {billsheadings.map((heading, index) => (
               <div
                 key={index}
                 className="flex items-center px-3 py-4 text-[#595959]"
@@ -147,7 +136,7 @@ const Estimates = () => {
           {displayedRows.map((item, index) => (
             <div
               key={index}
-              className="min-w-[900px] grid grid-cols-6 border-b border-stroke"
+              className="min-w-[900px] grid grid-cols-7 border-b border-stroke"
             >
               <div className="flex items-center justify-start px-3 py-4">
                 <p className="text-sm text-[#242E3E] font-normal">
@@ -162,14 +151,19 @@ const Estimates = () => {
               <div className="flex items-center justify-start px-3 py-4">
                 <span
                   className="px-3 py-1 rounded text-sm font-bold"
-                  style={getStatusStyle(item?.status)}
+                  style={getStatusStyle2(item?.status2)}
                 >
-                  {item?.status}
+                  {item?.status2}
                 </span>
               </div>
               <div className="flex items-center justify-start px-3 py-4">
                 <p className="text-sm text-[#242E3E] font-normal">
-                  {item?.customer}
+                  {item?.vendor}
+                </p>
+              </div>
+              <div className="flex items-center justify-start px-3 py-4">
+                <p className="text-sm text-[#242E3E] font-normal">
+                  {item?.duedate}
                 </p>
               </div>
               <div className="flex items-center justify-start px-3 py-4">
@@ -196,4 +190,4 @@ const Estimates = () => {
   );
 };
 
-export default Estimates;
+export default AllBills;

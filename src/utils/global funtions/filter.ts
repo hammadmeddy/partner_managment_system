@@ -2,6 +2,7 @@ export const handleFilterChange = ({
   fromDate,
   toDate,
   status,
+  vendor,
   setFilteredData,
   data,
 }) => {
@@ -19,6 +20,9 @@ export const handleFilterChange = ({
   if (status) {
     filtered = filtered.filter((item) => item.status === status);
   }
+  if (vendor) {
+    filtered = filtered.filter((item) => item.vendor === vendor);
+  }
   setFilteredData(filtered);
 };
 
@@ -27,9 +31,11 @@ export const handleFilterRemove = (
   setFromDate,
   setToDate,
   setStatus,
+  setVendor,
   initialFromDate,
   initialToDate,
-  initialStatus
+  initialStatus,
+  initialVendor
 ) => {
   if (filterLabel === "From") {
     setFromDate(initialFromDate);
@@ -40,36 +46,49 @@ export const handleFilterRemove = (
   if (filterLabel === "Status") {
     setStatus(initialStatus);
   }
-  handleFilterChange(); // Reset data to original state without any filtering
+  if (filterLabel === "Vendor") {
+    setVendor(initialVendor);
+  }
+  handleFilterChange({ fromDate, toDate, vendor, status }); // Reset data to original state without any filtering
 };
 
 // Calculate the number of active filters
-export const activeFiltersCount = ({ fromDate, toDate, status }) =>
-  (fromDate ? 1 : 0) + (toDate ? 1 : 0) + (status ? 1 : 0);
+export const activeFiltersCount = ({ fromDate, toDate, status, vendor }) =>
+  (fromDate ? 1 : 0) + (toDate ? 1 : 0) + (status ? 1 : 0) + (vendor ? 1 : 0);
 
 // Filter function that updates the filtered data based on input
 export const handleApplyFilter = ({
   fromDate,
   toDate,
   status,
+  vendor,
   setFilteredData,
   data,
   closeModal,
 }) => {
-  handleFilterChange({ fromDate, toDate, status, setFilteredData, data });
-  closeModal(); // Close modal after applying filters
+  handleFilterChange({
+    fromDate,
+    toDate,
+    status,
+    setFilteredData,
+    data,
+    vendor,
+  });
+  closeModal();
 };
 
 export const getSelectedFilters = ({
   fromDate,
   toDate,
   status,
+  vendor,
   formatDate,
 }) => {
   const filters = [];
   if (fromDate) filters.push({ label: "From", value: formatDate(fromDate) });
   if (toDate) filters.push({ label: "To", value: formatDate(toDate) });
   if (status) filters.push({ label: "Status", value: status });
+  if (vendor) filters.push({ label: "Vendor", value: vendor });
   return filters;
 };
 

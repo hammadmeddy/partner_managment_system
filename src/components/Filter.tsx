@@ -2,11 +2,14 @@ import React from "react";
 
 const Filter = ({
   fromDate,
+  filters,
   toDate,
   status,
+  vendor,
   setFromDate,
   setToDate,
   setStatus,
+  setVendor,
   applyFilter,
   closeModal,
 }) => {
@@ -19,37 +22,71 @@ const Filter = ({
         <h3 className="text-lg font-semibold mb-4">Apply Filters</h3>
 
         <div className="mb-4">
-          {/* From Date */}
-          <input
-            type="date"
-            value={fromDate}
-            onChange={(e) => setFromDate(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg w-full"
-          />
+          {filters.includes("fromDate") && (
+            <div className="filter-item">
+              <label htmlFor="fromDate">From Date</label>
+              <input
+                type="date"
+                id="fromDate"
+                value={fromDate}
+                onChange={(e) => setFromDate(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg w-full"
+              />
+            </div>
+          )}
         </div>
 
         <div className="mb-4">
-          {/* To Date */}
-          <input
-            type="date"
-            value={toDate}
-            onChange={(e) => setToDate(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg w-full"
-          />
+          {filters.includes("toDate") && (
+            <div className="filter-item">
+              <label htmlFor="toDate">To Date</label>
+              <input
+                type="date"
+                id="toDate"
+                value={toDate}
+                onChange={(e) => setToDate(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg w-full"
+              />
+            </div>
+          )}
         </div>
 
         <div className="mb-4">
-          {/* Status Dropdown */}
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg w-full"
-          >
-            <option value="">All</option>
-            <option value="Completed">Completed</option>
-            <option value="Pending">Pending</option>
-            <option value="Failed">Failed</option>
-          </select>
+          {filters.includes("status") && (
+            <div className="filter-item">
+              <label htmlFor="status">Status</label>
+              <select
+                id="status"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg w-full"
+              >
+                <option value="">Select Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
+                <option value="Failed">Failed</option>
+              </select>
+            </div>
+          )}
+        </div>
+
+        <div className="mb-4">
+          {filters.includes("vendor") && (
+            <div className="filter-item">
+              <label htmlFor="vendor">Vendor</label>
+              <select
+                id="vendor"
+                value={vendor}
+                onChange={(e) => setVendor(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg w-full"
+              >
+                <option value="">Select Vendor</option>
+                <option value="PromTech">PromTech</option>
+                <option value="abc">abc</option>
+                <option value="123">123</option>
+              </select>
+            </div>
+          )}
         </div>
 
         <div className="flex justify-end space-x-2">

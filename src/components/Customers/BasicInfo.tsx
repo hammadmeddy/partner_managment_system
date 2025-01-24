@@ -30,13 +30,11 @@ const BasicInfo = ({ setIsValid }) => {
       formData.lastname &&
       formData.notes &&
       formData.website;
-
-    // Pass the validation status back to the parent
     setIsValid(isValid);
-  }, [formData, setIsValid]); // Dependencies: Runs when any part of formData changes
+  }, [formData, setIsValid]);
 
   const toggleBasicInfoVisibility = () => {
-    setIsBasicInfoVisible(!isBasicInfoVisible); // Toggle the visibility state
+    setIsBasicInfoVisible(!isBasicInfoVisible);
   };
 
   const handleBasicInfoChange = (e) => {

@@ -7,9 +7,11 @@ const SelectedFilters = ({
   setFromDate,
   setToDate,
   setStatus,
+  setVendor,
   initialFromDate,
   initialToDate,
   initialStatus,
+  initialVendor,
 }) => {
   return (
     <div className="flex items-center pb-3 flex-wrap gap-2">
@@ -30,9 +32,11 @@ const SelectedFilters = ({
                 setFromDate,
                 setToDate,
                 setStatus,
+                setVendor,
                 initialFromDate,
                 initialToDate,
-                initialStatus
+                initialStatus,
+                initialVendor
               )
             }
             className="ml-2"

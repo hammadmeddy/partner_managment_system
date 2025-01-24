@@ -24,3 +24,13 @@ export const customersheadings = [
   "Balance",
   "Actions",
 ];
+
+export const billsheadings = [
+  "Date",
+  "Number",
+  "Status",
+  "Vendor",
+  "Due Date",
+  "Amount Due",
+  "Actions",
+];

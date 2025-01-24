@@ -22,8 +22,9 @@ import Login from "./pages/Authentication/SignIn";
 import NewEstimates from "./components/Estimates/NewEstimates";
 import Invoices from "./components/Invoices/Invoices";
 import AllCustomers from "./components/Customers/AllCustomers";
-import AddCustomers from "./components/Customers/AddCustomers";
 import NewCustomer from "./components/Customers/NewCustomer";
+import AllBills from "./components/Bills/AllBills";
+import AddBill from "./components/Bills/AddBill";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -123,6 +124,17 @@ function App() {
                 element={
                   <>
                     <PageTitle title="Bills" />
+                    <AllBills />
+                  </>
+                }
+              />
+
+              <Route
+                path="/addbill"
+                element={
+                  <>
+                    <PageTitle title="Add Bill" />
+                    <AddBill />
                   </>
                 }
               />

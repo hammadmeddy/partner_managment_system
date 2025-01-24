@@ -31,6 +31,8 @@ const Header = (props: {
         return "New Customer";
       case "/purchases/bills":
         return "Bills";
+      case "/addbill":
+        return "Add Bill";
       case "/reports":
         return "Reports";
       case "/settings":
@@ -57,7 +59,7 @@ const Header = (props: {
     };
   }, []);
 
-  const backButtonPages = ["/newestimates", "/newcustomer"];
+  const backButtonPages = ["/newestimates", "/newcustomer", "/addbill"];
   const showBackButton = backButtonPages.includes(location.pathname);
 
   const handleBack = () => {
@@ -65,6 +67,8 @@ const Header = (props: {
       navigate("/sales/estimates"); // Navigate to the estimates page
     } else if (location.pathname === "/newcustomer") {
       navigate("/sales/customers"); // Navigate to the customers page
+    } else if (location.pathname === "/addbill") {
+      navigate("/purchases/bills"); // Navigate to the customers page
     }
   };
 
