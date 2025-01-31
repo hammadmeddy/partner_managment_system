@@ -122,6 +122,20 @@ export const addNewRow = ({ setRowsData, rowsData }) => {
   setRowsData((prevRows) => [...prevRows, newRow]);
 };
 
+export const addNewLine = ({ setRowsData, rowsData }) => {
+  const newRow = {
+    id: rowsData.length + 1,
+    Item: "",
+    ExpenseCategory: "",
+    Description: "Write description",
+    Quantity: 1,
+    Price: 100,
+    Tax: "Tax in %",
+    Amount: "$200",
+  };
+  setRowsData((prevRows) => [...prevRows, newRow]);
+};
+
 export const addNewDiscount = ({ rowsData, setRowsData }) => {
   const newRow = {
     id: rowsData.length + 1,
@@ -139,4 +153,46 @@ export const handleDiscountInputChange = (e, rowId, field, setRowsData) => {
   setRowsData((prevRows) =>
     prevRows.map((row) => (row.id === rowId ? { ...row, [field]: value } : row))
   );
+};
+
+export const handleBillDateChange = (
+  selectedDate,
+  setBillDate,
+  setDueDate,
+  setFormData,
+  formatDate,
+  dueDate
+) => {
+  setBillDate(selectedDate);
+  setFormData((prevState) => ({
+    ...prevState,
+    billdate: formatDate(selectedDate),
+  }));
+  if (dueDate <= selectedDate) {
+    const newDueDate = new Date(selectedDate);
+    newDueDate.setDate(selectedDate.getDate() + 3);
+    setDueDate(newDueDate);
+    setFormData((prevState) => ({
+      ...prevState,
+      duedate: formatDate(newDueDate),
+    }));
+  }
+};
+
+export const handleDueDateChange = (
+  selectedDate,
+  billDate,
+  setDueDate,
+  setFormData,
+  formatDate
+) => {
+  if (selectedDate < billDate) {
+    alert("Due Date cannot be earlier than Bill Date.");
+    return;
+  }
+  setDueDate(selectedDate);
+  setFormData((prevState) => ({
+    ...prevState,
+    duedate: formatDate(selectedDate),
+  }));
 };

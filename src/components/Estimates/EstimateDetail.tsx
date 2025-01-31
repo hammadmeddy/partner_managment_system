@@ -2,7 +2,7 @@ import React, { useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
-import calender from "../../images/calender.png"; // Replace with your calendar icon path
+import calender from "../../images/calender.png";
 
 const EstimateDetail = () => {
   const [estimateNumber, setEstimateNumber] = useState("5");
@@ -12,7 +12,6 @@ const EstimateDetail = () => {
 
   const formatDate = (date) => format(date, "dd MMM yyyy");
 
-  // Custom calendar icon component
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <div className="relative w-full">
       <input

@@ -51,11 +51,11 @@ const BasicInfo = ({ setIsValid }) => {
         <button
           onClick={toggleBasicInfoVisibility}
           className="text-lg font-bold px-2 py-1 rounded"
-          title={isBasicInfoVisible ? "Close Footer" : "Open Footer"}
+          title={isBasicInfoVisible ? "Close " : "Open"}
         >
           <img
             src={isBasicInfoVisible ? pointerdown : pointerup}
-            alt={isBasicInfoVisible ? "Close Footer" : "Open Footer"}
+            alt={isBasicInfoVisible ? "Close" : "Open"}
           />
         </button>
       </div>

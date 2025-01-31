@@ -9,19 +9,19 @@ const BusinessDetails = () => {
   const [isBusinessDetailsVisible, setIsBusinessDetailsVisible] =
     useState(false);
   const toggleBusinessDetailsVisibility = () => {
-    setIsBusinessDetailsVisible(!isBusinessDetailsVisible); // Toggle the visibility state
+    setIsBusinessDetailsVisible(!isBusinessDetailsVisible);
   };
 
   const [summary, setSummary] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temporunt ut..."
-  ); // State to manage summary
+  );
   const handleSummaryChange = (e) => {
-    setSummary(e.target.value); // Update state with the input value
+    setSummary(e.target.value);
   };
 
-  const [title, setTitle] = useState("Elogix"); // State to manage summary
+  const [title, setTitle] = useState("Elogix");
   const handleTitleChange = (e) => {
-    setTitle(e.target.value); // Update state with the input value
+    setTitle(e.target.value);
   };
 
   const handleFileUpload = (file) => {

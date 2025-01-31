@@ -44,11 +44,11 @@ const Billing = ({ setIsValid }) => {
         <button
           onClick={toggleBillingVisibility}
           className="text-lg font-bold  px-2 py-1 rounded"
-          title={isBillingVisible ? "Close Footer" : "Open Footer"}
+          title={isBillingVisible ? "Close" : "Open"}
         >
           <img
             src={isBillingVisible ? pointerdown : pointerup}
-            alt={isBillingVisible ? "Close Footer" : "Open Footer"}
+            alt={isBillingVisible ? "Close" : "Open"}
           />
         </button>
       </div>

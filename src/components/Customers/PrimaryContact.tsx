@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import phone from "../../images/phone.png";
 import customer from "../../images/customer.png";
 
-const PrimaryContact = ({
-  formData,
-  setFormData,
-  initialState,
-  handleBasicInfoChange,
-}) => {
+const PrimaryContact = ({ formData, handleBasicInfoChange }) => {
   return (
     <>
       <div className="mt-5 rounded-xl bg-[#FFFFFF] border-[1px] border-[#ECE9E9] p-[16px]">

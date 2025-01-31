@@ -6,12 +6,12 @@ import Filter from "../../components/Filter";
 import ButtonGroup from "./ButtonGroup";
 import SelectedFilters from "../SelectedFilters";
 import ButtonGroup2 from "./ButtonGroup2";
-import { getStatusStyle } from "../../utils/global funtions/statusstyle";
-import { formatDate } from "../../utils/global funtions/dateformat";
-import { estimateheadings } from "../../utils/global funtions/headings";
-import { activeFiltersCount } from "../../utils/global funtions/filter";
-import { handleApplyFilter } from "../../utils/global funtions/filter";
-import { getSelectedFilters } from "../../utils/global funtions/filter";
+import { getStatusStyle } from "../../utils/global functions/statusstyle";
+import { formatDate } from "../../utils/global functions/dateformat";
+import { estimateheadings } from "../../utils/global functions/headings";
+import { activeFiltersCount } from "../../utils/global functions/filter";
+import { handleApplyFilter } from "../../utils/global functions/filter";
+import { getSelectedFilters } from "../../utils/global functions/filter";
 import Pagination from "../Pagination";
 
 const Estimates = () => {

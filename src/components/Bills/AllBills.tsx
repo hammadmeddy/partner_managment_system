@@ -4,12 +4,12 @@ import action from "../../images/action.png";
 import arrows from "../../images/arrows.png";
 import Filter from "../../components/Filter";
 import SelectedFilters from "../SelectedFilters";
-import { getStatusStyle2 } from "../../utils/global funtions/statusstyle";
-import { formatDate } from "../../utils/global funtions/dateformat";
-import { billsheadings } from "../../utils/global funtions/headings";
-import { activeFiltersCount } from "../../utils/global funtions/filter";
-import { handleApplyFilter } from "../../utils/global funtions/filter";
-import { getSelectedFilters } from "../../utils/global funtions/filter";
+import { getStatusStyle2 } from "../../utils/global functions/statusstyle";
+import { formatDate } from "../../utils/global functions/dateformat";
+import { billsheadings } from "../../utils/global functions/headings";
+import { activeFiltersCount } from "../../utils/global functions/filter";
+import { handleApplyFilter } from "../../utils/global functions/filter";
+import { getSelectedFilters } from "../../utils/global functions/filter";
 import Pagination from "../Pagination";
 import ButtonGroup5 from "./ButtonGroup5";
 

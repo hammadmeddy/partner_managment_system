@@ -25,6 +25,7 @@ import AllCustomers from "./components/Customers/AllCustomers";
 import NewCustomer from "./components/Customers/NewCustomer";
 import AllBills from "./components/Bills/AllBills";
 import AddBill from "./components/Bills/AddBill";
+import Reports from "./components/Reports/Reports";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -144,6 +145,7 @@ function App() {
                 element={
                   <>
                     <PageTitle title="Reports" />
+                    <Reports />
                   </>
                 }
               />

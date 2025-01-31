@@ -4,8 +4,8 @@ import edit from "../../images/edit.png";
 import deleteicon from "../../images/deleteicon.png";
 import visibility from "../../images/visibility.png";
 import moreverticaldouble from "../../images/moreverticaldouble.png";
-import { handleInputChange } from "../../utils/global funtions/filter";
-import { addNewRow } from "../../utils/global funtions/filter";
+import { handleInputChange } from "../../utils/global functions/filter";
+import { addNewRow } from "../../utils/global functions/filter";
 
 const AllItems = () => {
   const [rowsData, setRowsData] = useState([

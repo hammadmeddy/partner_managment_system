@@ -1,6 +1,6 @@
 import React from "react";
 import cancel from "../images/cancel.png"; // Adjust the path as needed
-import { handleFilterRemove } from "../utils/global funtions/filter";
+import { handleFilterRemove } from "../utils/global functions/filter";
 
 const SelectedFilters = ({
   selectedFilters,

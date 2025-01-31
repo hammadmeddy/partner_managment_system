@@ -8,7 +8,7 @@ import usericon from "../../images/usericon.png";
 import upload2 from "../../images/upload2.png";
 import search from "../../images/search.png";
 import Pagination from "../Pagination";
-import { customersheadings } from "../../utils/global funtions/headings";
+import { customersheadings } from "../../utils/global functions/headings";
 import { useNavigate } from "react-router-dom";
 
 const AllCustomers = () => {

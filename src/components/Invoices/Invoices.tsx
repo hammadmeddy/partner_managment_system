@@ -8,12 +8,12 @@ import Pagination from "../Pagination";
 import ButtonGroup3 from "./ButtonGroup3";
 import ButtonGroup4 from "./ButtonGroup4";
 import InvoiceDashboard from "./InvoiceDashboard";
-import { invoicesheadings } from "../../utils/global funtions/headings";
-import { getStatusStyle } from "../../utils/global funtions/statusstyle";
-import { formatDate } from "../../utils/global funtions/dateformat";
-import { activeFiltersCount } from "../../utils/global funtions/filter";
-import { handleApplyFilter } from "../../utils/global funtions/filter";
-import { getSelectedFilters } from "../../utils/global funtions/filter";
+import { invoicesheadings } from "../../utils/global functions/headings";
+import { getStatusStyle } from "../../utils/global functions/statusstyle";
+import { formatDate } from "../../utils/global functions/dateformat";
+import { activeFiltersCount } from "../../utils/global functions/filter";
+import { handleApplyFilter } from "../../utils/global functions/filter";
+import { getSelectedFilters } from "../../utils/global functions/filter";
 
 const Invoices = () => {
   const [filter, setFilter] = useState("All");

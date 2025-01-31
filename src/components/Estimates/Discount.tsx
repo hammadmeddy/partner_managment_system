@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import DynamicButton from "../DynamicButton";
 import deleteicon from "../../images/deleteicon.png";
-import { addNewDiscount } from "../../utils/global funtions/filter";
-import { handleDiscountInputChange } from "../../utils/global funtions/filter";
+import { addNewDiscount } from "../../utils/global functions/filter";
+import { handleDiscountInputChange } from "../../utils/global functions/filter";
 
 const Discount = () => {
   const [rowsData, setRowsData] = useState([

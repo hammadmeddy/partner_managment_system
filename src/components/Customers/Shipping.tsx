@@ -53,11 +53,11 @@ const Shipping = ({ setIsValid }) => {
         <button
           onClick={toggleShippingVisibility}
           className="text-lg font-bold  px-2 py-1 rounded"
-          title={isShippingVisible ? "Close Footer" : "Open Footer"}
+          title={isShippingVisible ? "Close" : "Open"}
         >
           <img
             src={isShippingVisible ? pointerdown : pointerup}
-            alt={isShippingVisible ? "Close Footer" : "Open Footer"}
+            alt={isShippingVisible ? "Close" : "Open "}
           />
         </button>
       </div>
