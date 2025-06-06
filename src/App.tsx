@@ -28,6 +28,7 @@ import PartnerOnBoarding from "./components/Partner on boarding/PartnerOnBoardin
 import Orders from "./components/Orders/Orders";
 import PartnerDirectory from "./components/Partner Directory/PartnerDirectory";
 import Rebates from "./components/Rebates/Rebates";
+import SupportCenter from "./components/Support Center/SupportCenter";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -103,6 +104,15 @@ function App() {
                   <>
                     <PageTitle title="Rebates" />
                     <Rebates />
+                  </>
+                }
+              />
+              <Route
+                path="/supportcenter"
+                element={
+                  <>
+                    <PageTitle title="Support" />
+                    <SupportCenter />
                   </>
                 }
               />

@@ -269,11 +269,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
                     <li onClick={() => handleLinkClick("Support")}>
                       <NavLink
-                        to="/support"
+                        to="/supportcenter"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
                         } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
-                          pathname.includes("/support") &&
+                          pathname.includes("/supportcenter") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >

@@ -1,4 +1,5 @@
 import { Search, Plus, MapPin, Star, Users } from "lucide-react";
+import { useState } from "react";
 
 export default function PartnerDirectory() {
   const partners = [
@@ -37,6 +38,22 @@ export default function PartnerDirectory() {
     },
   ];
 
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedTier, setSelectedTier] = useState("");
+
+  // Filter partners based on selectedRegion and selectedTier
+  const filteredPartners = partners.filter((partner) => {
+    const matchesRegion =
+      !selectedRegion ||
+      selectedRegion === "all" ||
+      partner.location === selectedRegion;
+    const matchesTier =
+      !selectedTier ||
+      selectedTier === "alltiers" ||
+      partner.tier.toLowerCase() === selectedTier.toLowerCase();
+    return matchesRegion && matchesTier;
+  });
+
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
       <div className="mx-auto">
@@ -53,98 +70,127 @@ export default function PartnerDirectory() {
         {/* Search and Filters */}
         <div className="flex gap-3 mb-8">
           <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-#666666 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#666666] w-5 h-5" />
             <input
               type="text"
               placeholder="Search partners by name, location, or specialty..."
-              className="w-full pl-12 pr-4 py-4 bg-#FFFF00 border-0 rounded-lg text-#333333 placeholder-#666666 focus:outline-none focus:ring-2 focus:ring-#3182CE"
+              className="w-full pl-12 pr-4 py-4 bg-[#FFFF00] border-0 rounded-lg text-[#333333] placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-#3182CE"
             />
           </div>
-          <button className="px-8 py-4 bg-#FFFF00 text-#333333 font-medium rounded-lg hover:bg-#F0F000 transition-colors whitespace-nowrap">
-            Filter
-          </button>
-          <button className="px-8 py-4 bg-#FFFF00 text-#333333 font-medium rounded-lg hover:bg-#F0F000 transition-colors whitespace-nowrap">
-            Sort
-          </button>
+          <div className="flex space-x-4">
+            {/* Region Select */}
+            <div className="relative w-48">
+              <select
+                className="appearance-none w-full px-8 py-4 bg-[#FFFF00] text-[#333333] font-medium rounded-lg hover:bg-[#F0F000] transition-colors whitespace-nowrap pr-10"
+                value={selectedRegion}
+                onChange={(e) => setSelectedRegion(e.target.value)}
+              >
+                <option value="">All Regions</option>
+                <option value="North America">North America</option>
+                <option value="Europe">Europe</option>
+                <option value="Asia Pacific">Asia Pacific</option>
+              </select>
+            </div>
+
+            {/* Tier Select */}
+            <div className="relative w-48">
+              <select
+                className="appearance-none w-full px-8 py-4 bg-[#FFFF00] text-[#333333] font-medium rounded-lg hover:bg-[#F0F000] transition-colors whitespace-nowrap pr-10"
+                value={selectedTier}
+                onChange={(e) => setSelectedTier(e.target.value)}
+              >
+                <option value="">All Tiers</option>
+                <option value="Gold">Gold</option>
+                <option value="Silver">Silver</option>
+                <option value="Registered">Registered</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         {/* Become a Partner CTA */}
-        <div className="bg-#F7FAFC border border-#E2E8F0 rounded-xl p-12 text-center mb-8">
-          <div className="w-16 h-16 bg-#4299E1 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Plus className="w-8 h-8 text-#FFFFFF" />
+        <div className="bg-[#F7FAFC] border-dotted border-[#2196F3] border-2 rounded-xl p-12 text-center mb-8">
+          <div className="w-16 h-16 bg-[#4299E1] rounded-full flex items-center justify-center mx-auto mb-6">
+            <Plus className="w-8 h-8 text-[#FFFFFF]" />
           </div>
-          <h2 className="text-2xl font-bold text-#2D3748 mb-3">
+          <h2 className="text-2xl font-bold text-[#2D3748] mb-3">
             Become a Partner
           </h2>
-          <p className="text-#718096 text-lg mb-8 max-w-md mx-auto">
+          <p className="text-[#718096] text-lg mb-8 max-w-md mx-auto">
             Join our network and unlock exclusive benefits, training, and
             support
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-#4299E1 to-#9F7AEA text-#FFFFFF font-semibold rounded-lg hover:from-#3182CE hover:to-#805AD5 transition-all shadow-lg">
+          <button className="px-8 py-4 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-[#FFFFFF] font-semibold rounded-lg hover:from-[#3182CE] hover:to-[#805AD5] transition-all shadow-lg">
             Start Onboarding
           </button>
         </div>
 
         {/* Partner Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {partners.map((partner) => (
-            <div
-              key={partner.id}
-              className="bg-#FFFFFF border border-#E2E8F0 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
-            >
-              {/* Partner Header */}
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-#4299E1 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <span className="text-#FFFFFF font-bold text-lg">
-                    {partner.avatar}
-                  </span>
+          {filteredPartners.length > 0 ? (
+            filteredPartners.map((partner) => (
+              <div
+                key={partner.id}
+                className="bg-[#FFFFFF] border border-[#E2E8F0] rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
+              >
+                {/* Partner Header */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 bg-[#4299E1] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-[#FFFFFF] font-bold text-lg">
+                      {partner.avatar}
+                    </span>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-[#2D3748] text-lg">
+                        {partner.name}
+                      </h3>
+                      <span
+                        className="px-2 py-1 text-xs font-bold rounded text-[#000000]"
+                        style={{ backgroundColor: partner.tierColor }}
+                      >
+                        {partner.tier}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-bold text-#2D3748 text-lg">
-                      {partner.name}
-                    </h3>
-                    <span
-                      className="px-2 py-1 text-xs font-bold rounded text-#000000"
-                      style={{ backgroundColor: partner.tierColor }}
-                    >
-                      {partner.tier}
+
+                {/* Location */}
+                <div className="flex items-center gap-2 mb-3">
+                  <MapPin className="w-4 h-4 text-[#718096]" />
+                  <span className="text-[#718096]">{partner.location}</span>
+                </div>
+
+                {/* Specialty */}
+                <p className="text-[#718096] mb-4">{partner.specialty}</p>
+
+                {/* Stats */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 text-[#F6AD55] fill-current" />
+                    <span className="text-#2D3748 font-semibold">
+                      {partner.rating}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Users className="w-4 h-4 text-[#718096]" />
+                    <span className="text-[#718096]">
+                      {partner.projects} projects
                     </span>
                   </div>
                 </div>
+
+                {/* View Profile Button */}
+                <button className="w-full py-3 bg-[#FFFF00] text-[#333333] font-semibold rounded-lg hover:bg-[#F0F000] transition-colors">
+                  View Profile
+                </button>
               </div>
-
-              {/* Location */}
-              <div className="flex items-center gap-2 mb-3">
-                <MapPin className="w-4 h-4 text-#718096" />
-                <span className="text-#718096">{partner.location}</span>
-              </div>
-
-              {/* Specialty */}
-              <p className="text-#718096 mb-4">{partner.specialty}</p>
-
-              {/* Stats */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-1">
-                  <Star className="w-4 h-4 text-#F6AD55 fill-current" />
-                  <span className="text-#2D3748 font-semibold">
-                    {partner.rating}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Users className="w-4 h-4 text-#718096" />
-                  <span className="text-#718096">
-                    {partner.projects} projects
-                  </span>
-                </div>
-              </div>
-
-              {/* View Profile Button */}
-              <button className="w-full py-3 bg-#FFFF00 text-#333333 font-semibold rounded-lg hover:bg-#F0F000 transition-colors">
-                View Profile
-              </button>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-center col-span-full text-[#718096]">
+              No partners match the selected filters.
+            </p>
+          )}
         </div>
       </div>
     </div>
