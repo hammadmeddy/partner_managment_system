@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { setTitle } from "../redux/slices/titleSlice";
 import { useAppDispatch } from "../hooks/hooks";
@@ -83,7 +83,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         className={`fixed lg:static left-0 z-50 rounded-lg bg-white transform transition-all duration-300 ease-in-out ${
           sidebarOpen ? "w-[187px] translate-x-0" : "w-[60px] translate-x-0"
         }`}
-        style={{ top: "120px", height: "calc(92vh - 120px)" }}
+        style={{ top: "30%", height: "calc(92vh - 120px)" }}
       >
         <div className="h-full">
           <div className="border-[#cfe2f3] rounded-lg border-[1px] bg-white h-full">

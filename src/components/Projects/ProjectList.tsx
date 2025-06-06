@@ -1,4 +1,5 @@
 import  React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectListProps {
   filter: string;
@@ -127,7 +128,7 @@ const ProjectList = ({ filter }: ProjectListProps) => {
     if (filter === "completed") return project.status === "Completed";
     return true; // "all" filter
   });
-
+const navigate=useNavigate();
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {filteredProjects.map((project) => (
@@ -202,6 +203,7 @@ const ProjectList = ({ filter }: ProjectListProps) => {
               style={{
                 backgroundImage: "linear-gradient(to right, #3aeccb, #30d3b4)",
               }}
+              onClick={()=> navigate('/project/details')}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.filter = "brightness(0.9)")
               }

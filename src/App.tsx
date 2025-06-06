@@ -29,6 +29,7 @@ import Orders from "./components/Orders/Orders";
 import PartnerDirectory from "./components/Partner Directory/PartnerDirectory";
 import Rebates from "./components/Rebates/Rebates";
 import SupportCenter from "./components/Support Center/SupportCenter";
+import ProjectDashboard from "./components/Projects/project-dashboard";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -104,6 +105,15 @@ function App() {
                   <>
                     <PageTitle title="Rebates" />
                     <Rebates />
+                  </>
+                }
+              />
+              <Route
+                path="/project/details"
+                element={
+                  <>
+                    <PageTitle title="Dashboard" />
+                    <ProjectDashboard />
                   </>
                 }
               />
