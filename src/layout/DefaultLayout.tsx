@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React,{ useState } from "react";
 import Header from "../components/header";
 import Sidebar from "../components/sidebar";
 import { Outlet } from "react-router-dom";
@@ -13,7 +13,7 @@ const DefaultLayout = () => {
     <div className="min-h-screen bg-[#f4f4fa]">
       {/* Double Header - Full width spanning entire screen */}
       {isAuthenticated && (
-        <div className="fixed top-0 left-0 right-0 z-[99999]">
+        <div className="fixed top-0 left-0 right-0 z-50">
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         </div>
       )}
