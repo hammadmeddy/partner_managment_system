@@ -1,16 +1,6 @@
 "use client";
 
-interface NavigationProps {
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  tabs: string[];
-}
-
-export default function SupportCenterNav({
-  activeTab,
-  setActiveTab,
-  tabs,
-}: NavigationProps) {
+export default function AdminNav({ activeTab, setActiveTab, tabs }) {
   return (
     <div className="bg-[#30d3b4] rounded-xl p-2 mb-8">
       <div className="flex space-x-2">

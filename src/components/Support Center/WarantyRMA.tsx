@@ -29,11 +29,11 @@ export default function WarrantyRMA() {
             placeholder="Enter serial number (e.g., SN123456789)"
             value={serialNumber}
             onChange={(e) => setSerialNumber(e.target.value)}
-            className="flex-1 bg-[#FFFF00] text-white placeholder-white px-6 py-4 rounded-xl text-lg font-medium"
+            className="flex-1 bg-[#30d3b4] text-white placeholder-white px-6 py-4 rounded-xl text-lg font-medium"
           />
           <button
             onClick={handleCheckStatus}
-            className="bg-[#FFFF00] text-white font-semibold px-8 py-4 rounded-xl hover:bg-[#E6E600] transition-colors"
+            className="bg-[#30d3b4] text-white font-semibold px-8 py-4 rounded-xl hover:bg-[#E6E600] transition-colors"
           >
             Check Status
           </button>

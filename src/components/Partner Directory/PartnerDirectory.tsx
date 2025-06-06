@@ -59,10 +59,10 @@ export default function PartnerDirectory() {
       <div className="mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-4xl font-bold text-#2D3748 mb-2">
+          <h1 className="text-4xl font-bold text-black mb-2">
             Partner Directory
           </h1>
-          <p className="text-#718096 text-lg">
+          <p className="text-[#718096] text-lg">
             Connect with our trusted network of partners worldwide
           </p>
         </div>
@@ -74,14 +74,14 @@ export default function PartnerDirectory() {
             <input
               type="text"
               placeholder="Search partners by name, location, or specialty..."
-              className="w-full pl-12 pr-4 py-4 bg-[#FFFF00] border-0 rounded-lg text-[#333333] placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-#3182CE"
+              className="w-full pl-12 pr-4 py-4 bg-white border-0 rounded-lg text-[#333333] placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-#3182CE"
             />
           </div>
           <div className="flex space-x-4">
             {/* Region Select */}
             <div className="relative w-48">
               <select
-                className="appearance-none w-full px-8 py-4 bg-[#FFFF00] text-[#333333] font-medium rounded-lg hover:bg-[#F0F000] transition-colors whitespace-nowrap pr-10"
+                className="appearance-none w-full px-8 py-4 bg-[#30d3b4] text-[#333333] font-medium rounded-lg hover:bg-[#30d3b4] transition-colors whitespace-nowrap pr-10"
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
               >
@@ -95,7 +95,7 @@ export default function PartnerDirectory() {
             {/* Tier Select */}
             <div className="relative w-48">
               <select
-                className="appearance-none w-full px-8 py-4 bg-[#FFFF00] text-[#333333] font-medium rounded-lg hover:bg-[#F0F000] transition-colors whitespace-nowrap pr-10"
+                className="appearance-none w-full px-8 py-4 bg-[#30d3b4] text-[#333333] font-medium rounded-lg hover:bg-[#30d3b4] transition-colors whitespace-nowrap pr-10"
                 value={selectedTier}
                 onChange={(e) => setSelectedTier(e.target.value)}
               >
@@ -120,7 +120,7 @@ export default function PartnerDirectory() {
             Join our network and unlock exclusive benefits, training, and
             support
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-[#FFFFFF] font-semibold rounded-lg hover:from-[#3182CE] hover:to-[#805AD5] transition-all shadow-lg">
+          <button className="px-8 py-4 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-[#FFFFFF] font-semibold rounded-xl hover:from-[#3182CE] hover:to-[#805AD5] transition-all shadow-lg">
             Start Onboarding
           </button>
         </div>
@@ -181,7 +181,7 @@ export default function PartnerDirectory() {
                 </div>
 
                 {/* View Profile Button */}
-                <button className="w-full py-3 bg-[#FFFF00] text-[#333333] font-semibold rounded-lg hover:bg-[#F0F000] transition-colors">
+                <button className="w-full py-3 bg-[#30d3b4] text-[#333333] font-semibold rounded-lg hover:bg-[#30d3b4] transition-colors">
                   View Profile
                 </button>
               </div>

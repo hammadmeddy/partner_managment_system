@@ -33,7 +33,7 @@ export default function ContactCard({
       {details}
       <button
         onClick={onButtonClick}
-        className="w-full bg-[#FFFF00] text-white font-semibold py-3 rounded-lg hover:bg-[#E6E600] transition-colors"
+        className="w-full bg-[#30d3b4] text-white font-semibold py-3 rounded-lg hover:bg-[#E6E600] transition-colors"
       >
         {buttonText}
       </button>

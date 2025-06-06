@@ -91,8 +91,8 @@ export default function PartnerOnBoarding() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen p-4">
+      <div className="mx-auto">
         <OnboardingHeader showBackButton={currentStep < 5} />
 
         {currentStep < 5 && (

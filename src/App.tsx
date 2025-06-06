@@ -30,6 +30,7 @@ import PartnerDirectory from "./components/Partner Directory/PartnerDirectory";
 import Rebates from "./components/Rebates/Rebates";
 import SupportCenter from "./components/Support Center/SupportCenter";
 import ProjectDashboard from "./components/Projects/project-dashboard";
+import AdminPanel from "./components/Admin Panel/AdminPanel";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -69,6 +70,15 @@ function App() {
                   <>
                     <PageTitle title="Dashboard" />
                     <Dashboard />
+                  </>
+                }
+              />
+              <Route
+                path="/adminpanel"
+                element={
+                  <>
+                    <PageTitle title="Admin Panel" />
+                    <AdminPanel />
                   </>
                 }
               />

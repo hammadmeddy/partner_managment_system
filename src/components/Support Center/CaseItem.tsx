@@ -54,7 +54,7 @@ export default function CaseItem({
         <div className="flex items-center space-x-2">
           <button
             onClick={() => onViewDetails(id)}
-            className="bg-[#FFFF00] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#E6E600] transition-colors flex items-center space-x-2"
+            className="bg-[#30d3b4] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#E6E600] transition-colors flex items-center space-x-2"
           >
             <Eye className="w-4 h-4" />
             <span>View Details</span>

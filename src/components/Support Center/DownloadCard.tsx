@@ -32,7 +32,7 @@ export default function DownloadCard({
           <h3 className="font-semibold text-[#1F2937] mb-1">{title}</h3>
           <p className="text-[#1F2937] mb-1">{description}</p>
           <div className="flex items-center justify-between">
-            <span className="text-[#6B7280] text-sm border border-[#FFFF00] rounded-full px-3 py-1">
+            <span className="text-[#6B7280] text-sm border border-[#30d3b4] rounded-full px-3 py-1">
               Downloads
             </span>
             <span className="text-[#6B7280] text-sm font-medium">{size}</span>
@@ -41,7 +41,7 @@ export default function DownloadCard({
       </div>
       <button
         onClick={() => onDownload(title)}
-        className="w-full bg-[#FFFF00] text-white font-semibold py-3 rounded-lg hover:bg-[#E6E600] transition-colors flex items-center justify-center space-x-2"
+        className="w-full bg-[#30d3b4] text-white font-semibold py-3 rounded-lg hover:bg-[#30d3b4] transition-colors flex items-center justify-center space-x-2"
       >
         <Download className="w-4 h-4" />
         <span>Download</span>

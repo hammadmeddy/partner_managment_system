@@ -45,7 +45,7 @@ export default function SupportCases() {
         </h2>
         <button
           onClick={handleNewCase}
-          className="bg-[#FFFF00] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#E6E600] transition-colors flex items-center space-x-2"
+          className="bg-[#30d3b4] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#E6E600] transition-colors flex items-center space-x-2"
         >
           <Plus className="w-4 h-4" />
           <span>New Case</span>

@@ -45,7 +45,7 @@ export default function Downloads() {
           placeholder="Search downloads..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-[#FFFF00] text-white placeholder-white px-12 py-4 rounded-xl text-lg font-medium"
+          className="w-full bg-[#30d3b4] text-white placeholder-white px-12 py-4 rounded-xl text-lg font-medium"
         />
       </div>
 
