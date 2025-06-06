@@ -13,26 +13,27 @@ import SignIn from "./pages/Authentication/SignIn";
 import Loader from "./common/Loader";
 import PageTitle from "./components/PageTitle";
 import { useDispatch } from "react-redux";
-import Estimates from "./components/Estimates/Estimates";
 import ForgetPassword from "./pages/Authentication/ForgetPassword";
 import SignUp from "./pages/Authentication/SignUp";
 import TwoFA from "./pages/Authentication/TwoFA";
 import NewPassword from "./pages/Authentication/NewPassword";
 import Login from "./pages/Authentication/SignIn";
-import NewEstimates from "./components/Estimates/NewEstimates";
-import Invoices from "./components/Invoices/Invoices";
-import AllCustomers from "./components/Customers/AllCustomers";
-import NewCustomer from "./components/Customers/NewCustomer";
-import AllBills from "./components/Bills/AllBills";
-import AddBill from "./components/Bills/AddBill";
-import Reports from "./components/Reports/Reports";
+import Projects from "./components/Projects/Projects";
+import ManufacturerDashboard from "./components/Manufacturer/ManufacturerDashboard";
+import DistributorDashboard from "./components/Distributor/DistributorDashboard";
+import PartnerDashboard from "./components/Partners/PartnersDashboard";
+import SupportDashboard from "./components/Support/SupportDashboard";
+import AdministratorDashboard from "./components/Administrator/AdministratorDashboard";
+import PartnerOnBoarding from "./components/Partner on boarding/PartnerOnBoarding";
+import Orders from "./components/Orders/Orders";
+import PartnerDirectory from "./components/Partner Directory/PartnerDirectory";
+import Rebates from "./components/Rebates/Rebates";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   // const isAuthenticated = useSelector((state) => state?.auth?.isAuthenticated);
-  // console.log("Value of isAuthenticated is :", isAuthenticated);
   const isAuthenticated = true;
 
   useEffect(() => {
@@ -69,91 +70,93 @@ function App() {
                   </>
                 }
               />
-
               <Route
-                path="/sales/estimates"
+                path="/administratordashboard"
                 element={
                   <>
-                    <PageTitle title="Estimates" />
-                    <Estimates />
-                  </>
-                }
-              />
-
-              <Route
-                path="/sales/invoices"
-                element={
-                  <>
-                    <PageTitle title="Invoices" />
-                    <Invoices />
-                  </>
-                }
-              />
-
-              <Route
-                path="/newestimates"
-                element={
-                  <>
-                    <PageTitle title="New Estimates" />
-                    <NewEstimates />
-                  </>
-                }
-              />
-
-              <Route
-                path="/sales/customers"
-                element={
-                  <>
-                    <PageTitle title="Customers" />
-                    <AllCustomers />
-                  </>
-                }
-              />
-
-              <Route
-                path="/newcustomer"
-                element={
-                  <>
-                    <PageTitle title="New Customer" />
-                    <NewCustomer />
-                  </>
-                }
-              />
-
-              <Route
-                path="/purchases/bills"
-                element={
-                  <>
-                    <PageTitle title="Bills" />
-                    <AllBills />
-                  </>
-                }
-              />
-
-              <Route
-                path="/addbill"
-                element={
-                  <>
-                    <PageTitle title="Add Bill" />
-                    <AddBill />
-                  </>
-                }
-              />
-
-              <Route
-                path="/reports"
-                element={
-                  <>
-                    <PageTitle title="Reports" />
-                    <Reports />
+                    <PageTitle title="Admin Dashboard" />
+                    <AdministratorDashboard />
                   </>
                 }
               />
               <Route
-                path="/workflow/system"
+                path="/partneronboarding"
                 element={
                   <>
-                    <PageTitle title="Workflow System" />
+                    <PageTitle title="" />
+                    <PartnerOnBoarding />
+                  </>
+                }
+              />
+              <Route
+                path="/partnerdirectory"
+                element={
+                  <>
+                    <PageTitle title="Partners" />
+                    <PartnerDirectory />
+                  </>
+                }
+              />
+              <Route
+                path="/rebates"
+                element={
+                  <>
+                    <PageTitle title="Rebates" />
+                    <Rebates />
+                  </>
+                }
+              />
+              <Route
+                path="/manufacturerdashboard"
+                element={
+                  <>
+                    <PageTitle title="Manufacturer Dashboard" />
+                    <ManufacturerDashboard />
+                  </>
+                }
+              />
+              <Route
+                path="/distributordashboard"
+                element={
+                  <>
+                    <PageTitle title="Distributor Dashboard" />
+                    <DistributorDashboard />
+                  </>
+                }
+              />
+              <Route
+                path="/partnerdashboard"
+                element={
+                  <>
+                    <PageTitle title="Partner Dashboard" />
+                    <PartnerDashboard />
+                  </>
+                }
+              />
+              <Route
+                path="/support-dashboard"
+                element={
+                  <>
+                    <PageTitle title="Support Dashboard" />
+                    <SupportDashboard />
+                  </>
+                }
+              />
+              <Route
+                path="/projects"
+                element={
+                  <>
+                    <PageTitle title="Projects" />
+                    <Projects />
+                  </>
+                }
+              />
+              <Route
+                path="/orders"
+                element={
+                  <>
+                    <PageTitle title="Orders" />
+                    <Orders />
                   </>
                 }
               />

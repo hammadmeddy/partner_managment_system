@@ -1,8 +1,12 @@
 import React from "react";
-import CardDataStats from "../../components/CardDataStats";
+import MainPage from "../../components/Landingpage/MainPage";
 
 const Dashboard: React.FC = () => {
-  return <></>;
+  return (
+    <>
+      <MainPage />
+    </>
+  );
 };
 
 export default Dashboard;
