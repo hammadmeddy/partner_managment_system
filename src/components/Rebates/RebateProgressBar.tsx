@@ -2,7 +2,7 @@ const RebateProgressBar = () => {
   return (
     <div className=" mx-auto space-y-6">
       {/* Main Progress Card */}
-      <div className="bg-gradient-to-r from-[#4A90E2] to-[#8E44AD] rounded-2xl p-8 text-[#FFFFFF] relative overflow-hidden">
+      <div className="bg-gradient-to-r from-[#2196F3] via-[#1E88E5] to-[#8E24AA] rounded-2xl p-8 text-[#FFFFFF] relative overflow-hidden">
         <div className="flex justify-between items-start mb-6">
           <div>
             <h2 className="text-3xl font-bold mb-2">Q1 2024 Progress</h2>

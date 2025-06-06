@@ -28,7 +28,9 @@ import PartnerOnBoarding from "./components/Partner on boarding/PartnerOnBoardin
 import Orders from "./components/Orders/Orders";
 import PartnerDirectory from "./components/Partner Directory/PartnerDirectory";
 import Rebates from "./components/Rebates/Rebates";
+import SupportCenter from "./components/Support Center/SupportCenter";
 import ProjectDashboard from "./components/Projects/project-dashboard";
+import AdminPanel from "./components/Admin Panel/AdminPanel";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
@@ -71,12 +73,12 @@ function App() {
                   </>
                 }
               />
-               <Route
-                path="/project/details"
+              <Route
+                path="/adminpanel"
                 element={
                   <>
-                    <PageTitle title="Dashboard" />
-                    <ProjectDashboard />
+                    <PageTitle title="Admin Panel" />
+                    <AdminPanel />
                   </>
                 }
               />
@@ -113,6 +115,24 @@ function App() {
                   <>
                     <PageTitle title="Rebates" />
                     <Rebates />
+                  </>
+                }
+              />
+              <Route
+                path="/project/details"
+                element={
+                  <>
+                    <PageTitle title="Dashboard" />
+                    <ProjectDashboard />
+                  </>
+                }
+              />
+              <Route
+                path="/supportcenter"
+                element={
+                  <>
+                    <PageTitle title="Support" />
+                    <SupportCenter />
                   </>
                 }
               />

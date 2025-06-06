@@ -1,15 +1,18 @@
-"use client"
+"use client";
 
-import { X, Calendar, DollarSign, Building2 } from "lucide-react"
-import  React from "react"
-import { useState } from "react"
+import { X, Calendar, DollarSign, Building2 } from "lucide-react";
+import React from "react";
+import { useState } from "react";
 
 interface NewProjectModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const NewProjectModal: React.FC<NewProjectModalProps> = ({ isOpen, onClose }) => {
+const NewProjectModal: React.FC<NewProjectModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
   const [formData, setFormData] = useState({
     projectTitle: "",
     company: "",
@@ -18,45 +21,56 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ isOpen, onClose }) =>
     budget: "",
     status: "Planning",
     description: "",
-  })
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission here
-    console.log("Form submitted:", formData)
-    onClose()
-  }
+    console.log("Form submitted:", formData);
+    onClose();
+  };
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
     <div
       className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[9999] p-4"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
-          onClose()
+          onClose();
         }
       }}
     >
       <div
-        className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent overflow-y-auto relative animate-in fade-in-0 zoom-in-95 duration-300"
+        className="bg-white shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative animate-in fade-in-0 zoom-in-95 duration-300"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div>
-            <h2 className="text-2xl font-bold text-[#0f172a]">Create New Project</h2>
-            <p className="text-[#64748b] mt-1">Add a new project to your portfolio</p>
+            <h2 className="text-2xl font-bold text-[#0f172a]">
+              Create New Project
+            </h2>
+            <p className="text-[#64748b] mt-1">
+              Add a new project to your portfolio
+            </p>
           </div>
-          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+          >
             <X className="w-5 h-5 text-[#64748b]" />
           </button>
         </div>
@@ -65,7 +79,9 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ isOpen, onClose }) =>
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Project Title */}
           <div>
-            <label className="block text-sm font-semibold text-[#0f172a] mb-2">Project Title *</label>
+            <label className="block text-sm font-semibold text-[#0f172a] mb-2">
+              Project Title *
+            </label>
             <input
               type="text"
               name="projectTitle"
@@ -96,7 +112,9 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ isOpen, onClose }) =>
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-semibold text-[#0f172a] mb-2">Project Status</label>
+            <label className="block text-sm font-semibold text-[#0f172a] mb-2">
+              Project Status
+            </label>
             <select
               name="status"
               value={formData.status}
@@ -162,7 +180,9 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ isOpen, onClose }) =>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-semibold text-[#0f172a] mb-2">Project Description</label>
+            <label className="block text-sm font-semibold text-[#0f172a] mb-2">
+              Project Description
+            </label>
             <textarea
               name="description"
               value={formData.description}
@@ -195,7 +215,7 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({ isOpen, onClose }) =>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewProjectModal
+export default NewProjectModal;
