@@ -1,5 +1,6 @@
-import logout from "../images/logout.png";
-import React, { useEffect, useRef, useState } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { setTitle } from "../redux/slices/titleSlice";
 import { useAppDispatch } from "../hooks/hooks";
@@ -17,7 +18,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
   // Set initial state to false (icons only) for all screen sizes
   useEffect(() => {
-    // Only set the initial state once when component mounts
     setSidebarOpen(false);
   }, []);
 
@@ -27,11 +27,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   );
 
   const handleLogOut = async () => {
-    logOut({ refresh });
+    // logOut({ refresh });
     localStorage.removeItem("access");
     localStorage.removeItem("refresh");
-    navigate("/signin");
-    dispatch(logout());
+    // navigate("/signin");
+    // dispatch(logout());
   };
 
   // close on click outside
@@ -72,6 +72,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const dispatch = useAppDispatch();
   const handleLinkClick = (title: string) => {
     dispatch(setTitle(title));
+    // Close sidebar on mobile after navigation
+    if (window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
   };
 
   return (
@@ -88,30 +92,39 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       <aside
         ref={sidebar}
         className={`fixed lg:static left-0 z-50 rounded-lg bg-white transform transition-all duration-300 ease-in-out ${
-          sidebarOpen ? "w-[187px] translate-x-0" : "w-[60px] translate-x-0"
+          sidebarOpen
+            ? "w-[200px] sm:w-[220px] translate-x-0"
+            : "w-[60px] sm:w-[65px] translate-x-0"
+        } ${
+          // Hide on mobile when closed, show on desktop
+          !sidebarOpen ? "lg:translate-x-0" : ""
         }`}
-        style={{ top: "120px", height: "calc(92vh - 120px)" }}
+        style={{
+          height: "calc(92vh - 120px)",
+          minHeight: "400px",
+          maxHeight: "calc(100vh - 140px)",
+        }}
       >
-        <div className="h-full">
-          <div className="border-[#cfe2f3] rounded-lg border-[1px] bg-white h-full">
-            <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear ">
-              <nav className="py-2 lg:py-4 px-2 ">
+        <div className="h-full flex flex-col">
+          <div className="border-[#cfe2f3] rounded-lg border-[1px] bg-white h-full flex flex-col">
+            {/* Scrollable navigation area */}
+            <div className="flex-1 overflow-y-auto no-scrollbar">
+              <nav className="py-2 lg:py-4 px-2">
                 <div>
-                  <ul className="mb-6 flex flex-col gap-1.5">
+                  <ul className="flex flex-col">
                     <li onClick={() => handleLinkClick("Dashboard")}>
                       <NavLink
                         to="/"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
-                        } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
-                          pathname.includes("/") &&
-                          "font-extrabold bg-[#f4f4fa]"
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                          pathname === "/" && "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="22px"
-                          height="22px"
+                          width="20px"
+                          height="20px"
                           viewBox="0 0 17 17"
                           version="1.1"
                           className="flex-shrink-0"
@@ -121,7 +134,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill="#000000"
                           />
                         </svg>
-                        {sidebarOpen && <span>Dashboard</span>}
+                        {sidebarOpen && (
+                          <span className="truncate">Dashboard</span>
+                        )}
                       </NavLink>
                     </li>
 
@@ -130,15 +145,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         to="/projects"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
-                        } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
                           pathname.includes("/projects") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="24px"
-                          height="24px"
+                          width="20px"
+                          height="20px"
                           viewBox="0 0 24 24"
                           fill="none"
                           className="flex-shrink-0"
@@ -156,7 +171,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill="#1F2328"
                           />
                         </svg>
-                        {sidebarOpen && <span>Projects</span>}
+                        {sidebarOpen && (
+                          <span className="truncate">Projects</span>
+                        )}
                       </NavLink>
                     </li>
 
@@ -165,7 +182,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         to="/orders"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
-                        } rounded-sm py-3 pl-3 pr-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
                           pathname.includes("/orders") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
@@ -173,8 +190,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="#000000"
-                          width="30px"
-                          height="30px"
+                          width="20px"
+                          height="20px"
                           viewBox="0 0 100 100"
                           className="flex-shrink-0"
                         >
@@ -190,7 +207,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             </g>
                           </g>
                         </svg>
-                        {sidebarOpen && <span>Orders</span>}
+                        {sidebarOpen && (
+                          <span className="truncate">Orders</span>
+                        )}
                       </NavLink>
                     </li>
 
@@ -198,16 +217,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       <NavLink
                         to="/rebates"
                         className={`group relative flex items-center ${
-                          sidebarOpen ? "gap-[16px]" : "justify-center"
-                        } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                          sidebarOpen ? "gap-[14px]" : "justify-center"
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
                           pathname.includes("/rebates") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="22px"
-                          height="22px"
+                          width="20px"
+                          height="20px"
                           viewBox="0 0 24 24"
                           fill="none"
                           className="flex-shrink-0"
@@ -243,7 +262,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        {sidebarOpen && <span>Rebates</span>}
+                        {sidebarOpen && (
+                          <span className="truncate">Rebates</span>
+                        )}
                       </NavLink>
                     </li>
 
@@ -252,15 +273,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         to="/partnerdirectory"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
-                        } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
                           pathname.includes("/partnerdirectory") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="24px"
-                          height="24px"
+                          width="20px"
+                          height="20px"
                           viewBox="0 0 24 24"
                           fill="none"
                           className="flex-shrink-0"
@@ -270,7 +291,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill="#000000"
                           />
                         </svg>
-                        {sidebarOpen && <span>Partners</span>}
+                        {sidebarOpen && (
+                          <span className="truncate">Partners</span>
+                        )}
                       </NavLink>
                     </li>
 
@@ -279,15 +302,15 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         to="/supportcenter"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
-                        } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
                           pathname.includes("/supportcenter") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="24px"
-                          height="24px"
+                          width="20px"
+                          height="20px"
                           viewBox="0 0 24 24"
                           fill="none"
                           className="flex-shrink-0"
@@ -305,15 +328,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             strokeLinejoin="round"
                           />
                         </svg>
-                        {sidebarOpen && <span>Support</span>}
+                        {sidebarOpen && (
+                          <span className="truncate">Support</span>
+                        )}
                       </NavLink>
                     </li>
+
                     <li onClick={() => handleLinkClick("Admin Panel")}>
                       <NavLink
                         to="/adminpanel"
                         className={`group relative flex items-center ${
-                          sidebarOpen ? "gap-[15px]" : "justify-center"
-                        } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
+                          sidebarOpen ? "gap-[14px]" : "justify-center"
+                        } rounded-sm py-3 px-2 sm:px-4 text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
                           pathname.includes("/adminpanel") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
@@ -321,44 +347,44 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 50 50"
-                          width="24px"
-                          height="24px"
+                          width="20px"
+                          height="20px"
                           className="flex-shrink-0"
                         >
-                          {" "}
                           <path d="M47.16,21.221l-5.91-0.966c-0.346-1.186-0.819-2.326-1.411-3.405l3.45-4.917c0.279-0.397,0.231-0.938-0.112-1.282 l-3.889-3.887c-0.347-0.346-0.893-0.391-1.291-0.104l-4.843,3.481c-1.089-0.602-2.239-1.08-3.432-1.427l-1.031-5.886 C28.607,2.35,28.192,2,27.706,2h-5.5c-0.49,0-0.908,0.355-0.987,0.839l-0.956,5.854c-1.2,0.345-2.352,0.818-3.437,1.412l-4.83-3.45 c-0.399-0.285-0.942-0.239-1.289,0.106L6.82,10.648c-0.343,0.343-0.391,0.883-0.112,1.28l3.399,4.863 c-0.605,1.095-1.087,2.254-1.438,3.46l-5.831,0.971c-0.482,0.08-0.836,0.498-0.836,0.986v5.5c0,0.485,0.348,0.9,0.825,0.985 l5.831,1.034c0.349,1.203,0.831,2.362,1.438,3.46l-3.441,4.813c-0.284,0.397-0.239,0.942,0.106,1.289l3.888,3.891 c0.343,0.343,0.884,0.391,1.281,0.112l4.87-3.411c1.093,0.601,2.248,1.078,3.445,1.424l0.976,5.861C21.3,47.647,21.717,48,22.206,48 h5.5c0.485,0,0.9-0.348,0.984-0.825l1.045-5.89c1.199-0.353,2.348-0.833,3.43-1.435l4.905,3.441 c0.398,0.281,0.938,0.232,1.282-0.111l3.888-3.891c0.346-0.347,0.391-0.894,0.104-1.292l-3.498-4.857 c0.593-1.08,1.064-2.222,1.407-3.408l5.918-1.039c0.479-0.084,0.827-0.5,0.827-0.985v-5.5C47.999,21.718,47.644,21.3,47.16,21.221z M25,32c-3.866,0-7-3.134-7-7c0-3.866,3.134-7,7-7s7,3.134,7,7C32,28.866,28.866,32,25,32z" />
                         </svg>
-                        {sidebarOpen && <span>Admin</span>}
+                        {sidebarOpen && <span className="truncate">Admin</span>}
                       </NavLink>
-                    </li>
-                    <li
-                      className={`absolute bottom-6 flex items-center ${
-                        sidebarOpen ? "gap-[14px]" : "justify-center"
-                      } w-[80%] cursor-pointer rounded-sm text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50`}
-                      onClick={handleLogOut}
-                    >
-                      <button className="group flex items-center text-sm text-black duration-100 ease-in-out">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="#000000"
-                          height="60px"
-                          width="60px"
-                          version="1.1"
-                          viewBox="0 0 500 500"
-                        >
-                          <g>
-                            <path d="M250,224c-4.4,0-8,3.6-8,8v24c0,4.4-3.6,8-8,8h-40c-4.4,0-8-3.6-8-8V144c0-4.4,3.6-8,8-8h40c4.4,0,8,3.6,8,8v24   c0,4.4,3.6,8,8,8s8-3.6,8-8v-24c0-13.2-10.8-24-24-24h-40c-13.2,0-24,10.8-24,24v112c0,13.2,10.8,24,24,24h40c13.2,0,24-10.8,24-24   v-24C258,227.6,254.4,224,250,224z" />
-                            <path d="M328.4,204.8c0.1-0.1,0.2-0.2,0.3-0.3c0,0,0,0,0-0.1c0.1-0.2,0.2-0.4,0.3-0.6c0.1-0.3,0.3-0.5,0.4-0.8   c0.1-0.3,0.2-0.5,0.3-0.8c0.1-0.2,0.2-0.4,0.2-0.7c0.2-1,0.2-2.1,0-3.1c0,0,0,0,0,0c0-0.2-0.1-0.4-0.2-0.7   c-0.1-0.3-0.1-0.5-0.2-0.8c0,0,0,0,0,0c-0.1-0.3-0.3-0.5-0.4-0.8c-0.1-0.2-0.2-0.4-0.3-0.6c-0.3-0.4-0.6-0.9-1-1.2l-32-32   c-3.1-3.1-8.2-3.1-11.3,0c-3.1,3.1-3.1,8.2,0,11.3l18.3,18.3H210c-4.4,0-8,3.6-8,8s3.6,8,8,8h92.7l-18.3,18.3   c-3.1,3.1-3.1,8.2,0,11.3c1.6,1.6,3.6,2.3,5.7,2.3s4.1-0.8,5.7-2.3l32-32c0,0,0,0,0,0C327.9,205.4,328.1,205.1,328.4,204.8z" />
-                          </g>
-                        </svg>
-                        <span className="text-black pb-2 text-sm font-semibold">
-                          {sidebarOpen && <span>Logout</span>}
-                        </span>
-                      </button>
                     </li>
                   </ul>
                 </div>
               </nav>
+            </div>
+
+            {/* Fixed logout section at bottom */}
+            <div className="border-t border-white px-2">
+              <button
+                className={`group relative flex items-center ${
+                  sidebarOpen ? "" : "justify-center"
+                } w-full rounded-sm text-xs sm:text-sm font-semibold text-black duration-100 ease-in-out`}
+                onClick={handleLogOut}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="#000000"
+                  height="50px"
+                  width="50px"
+                  version="1.1"
+                  viewBox="0 0 500 500"
+                  className="flex-shrink-0"
+                >
+                  <g>
+                    <path d="M250,224c-4.4,0-8,3.6-8,8v24c0,4.4-3.6,8-8,8h-40c-4.4,0-8-3.6-8-8V144c0-4.4,3.6-8,8-8h40c4.4,0,8,3.6,8,8v24   c0,4.4,3.6,8,8,8s8-3.6,8-8v-24c0-13.2-10.8-24-24-24h-40c-13.2,0-24,10.8-24,24v112c0,13.2,10.8,24,24,24h40c13.2,0,24-10.8,24-24   v-24C258,227.6,254.4,224,250,224z" />
+                    <path d="M328.4,204.8c0.1-0.1,0.2-0.2,0.3-0.3c0,0,0,0,0-0.1c0.1-0.2,0.2-0.4,0.3-0.6c0.1-0.3,0.3-0.5,0.4-0.8   c0.1-0.3,0.2-0.5,0.3-0.8c0.1-0.2,0.2-0.4,0.2-0.7c0.2-1,0.2-2.1,0-3.1c0,0,0,0,0,0c0-0.2-0.1-0.4-0.2-0.7   c-0.1-0.3-0.1-0.5-0.2-0.8c0,0,0,0,0,0c-0.1-0.3-0.3-0.5-0.4-0.8c-0.1-0.2-0.2-0.4-0.3-0.6c-0.3-0.4-0.6-0.9-1-1.2l-32-32   c-3.1-3.1-8.2-3.1-11.3,0c-3.1,3.1-3.1,8.2,0,11.3l18.3,18.3H210c-4.4,0-8,3.6-8,8s3.6,8,8,8h92.7l-18.3,18.3   c-3.1,3.1-3.1,8.2,0,11.3c1.6,1.6,3.6,2.3,5.7,2.3s4.1-0.8,5.7-2.3l32-32c0,0,0,0,0,0C327.9,205.4,328.1,205.1,328.4,204.8z" />
+                  </g>
+                </svg>
+                {sidebarOpen && <span className="truncate mb-2">Logout</span>}
+              </button>
             </div>
           </div>
         </div>

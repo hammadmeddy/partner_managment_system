@@ -72,12 +72,12 @@ const DashboardCards = () => {
 
   return (
     <div className="p-6 mt-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {topCards.map((card, index) => (
           <Link to={card.link} key={index}>
             <div
               style={{ background: card.gradientBg }}
-              className="p-4 py-12 space-y-1.5 rounded-2xl shadow-md flex flex-col items-center transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2 cursor-pointer"
+              className="p-3 max-h-64 py-12 space-y-1.5 rounded-2xl shadow-md flex flex-col items-center transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2 cursor-pointer"
             >
               <div
                 style={{
@@ -109,7 +109,7 @@ const DashboardCards = () => {
         {bottomCards.map((card, index) => (
           <Link to={card.link} key={index}>
             {/* Wrap card in Link */}
-            <div className="p-6 rounded-2xl shadow-md transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2 cursor-pointer">
+            <div className="p-6 max-h-44 py-10 rounded-2xl shadow-md transition-transform duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2 cursor-pointer">
               <div className="flex gap-3 items-center mb-4">
                 <div
                   style={{

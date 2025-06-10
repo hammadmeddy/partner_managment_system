@@ -1,6 +1,6 @@
 "use client";
 
-import React,{ useState } from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
@@ -19,11 +19,11 @@ const DefaultLayout = () => {
       )}
 
       {/* Content area below header */}
-      <div className="pt-[160px]">
+      <div className="pt-[135px] lg:pt-[160px]">
         <div className="flex">
           {/* Sidebar - Always render, let the sidebar component handle visibility */}
           {isAuthenticated && (
-            <div className="fixed ml-4 z-50">
+            <div className="fixed lg:ml-4 z-50">
               <Sidebar
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
