@@ -181,7 +181,7 @@ export default function PartnerDirectory() {
                 </div>
 
                 {/* View Profile Button */}
-                <button className="w-full py-3 bg-[#30d3b4] text-[#333333] font-semibold rounded-lg hover:bg-[#30d3b4] transition-colors">
+                <button className="w-full py-3 bg-[#30d3b4] text-white font-semibold rounded-lg hover:bg-[#30d3b4] transition-colors">
                   View Profile
                 </button>
               </div>
