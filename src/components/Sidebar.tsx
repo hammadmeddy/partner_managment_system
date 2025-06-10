@@ -100,11 +100,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                   <ul className="mb-6 flex flex-col gap-1.5">
                     <li onClick={() => handleLinkClick("Dashboard")}>
                       <NavLink
-                        to="/dashboard"
+                        to="/"
                         className={`group relative flex items-center ${
                           sidebarOpen ? "gap-[14px]" : "justify-center"
                         } rounded-sm py-3 px-4 text-sm font-semibold text-black duration-100 ease-in-out hover:bg-gray-50 ${
-                          pathname.includes("/dashboard") &&
+                          pathname.includes("/") &&
                           "font-extrabold bg-[#f4f4fa]"
                         }`}
                       >

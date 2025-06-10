@@ -46,7 +46,7 @@ const Header = (props: {
         return "Projects";
       case "/rebates":
         return "Rebates";
-      case "/dashboard":
+      case "/rebates":
         return "Dashboard";
       default:
         return "Dashboard";

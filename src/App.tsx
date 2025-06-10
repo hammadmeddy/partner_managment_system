@@ -58,14 +58,14 @@ function App() {
                 path="*"
                 element={
                   isAuthenticated ? (
-                    <Navigate to="/dashboard" replace />
+                    <Navigate to="/" replace />
                   ) : (
                     <Login />
                   )
                 }
               />
               <Route
-                path="/dashboard"
+                path="/"
                 element={
                   <>
                     <PageTitle title="Dashboard" />

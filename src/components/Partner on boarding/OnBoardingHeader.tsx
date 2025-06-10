@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export function OnboardingHeader({ showBackButton = true }) {
   const navigate = useNavigate();
 
-  const handleBackButton = () => navigate("/Dashboard");
+  const handleBackButton = () => navigate("/");
   return (
     <div className="mb-8">
       {showBackButton && (
