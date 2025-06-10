@@ -20,7 +20,7 @@ export function StepIndicator({
           return (
             <div key={step.id} className="flex flex-col items-center">
               <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 ${
+                className={`lg:w-16 lg:h-16 w-10 h-10 rounded-full flex items-center justify-center mb-3 ${
                   state === "completed"
                     ? "bg-[#4CAF50] text-[#FFFFFF]"
                     : state === "active"
@@ -35,7 +35,7 @@ export function StepIndicator({
                 )}
               </div>
               <span
-                className={`text-sm font-medium ${
+                className={`hidden md:block text-sm font-medium ${
                   state === "active" ? "text-[#2196F3]" : "text-[#9E9E9E]"
                 }`}
               >

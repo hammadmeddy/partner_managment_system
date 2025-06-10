@@ -1,5 +1,6 @@
 import { Search, Plus, MapPin, Star, Users } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PartnerDirectory() {
   const partners = [
@@ -53,6 +54,11 @@ export default function PartnerDirectory() {
       partner.tier.toLowerCase() === selectedTier.toLowerCase();
     return matchesRegion && matchesTier;
   });
+  const navigate = useNavigate();
+
+  const handleOnBoarding = () => {
+    navigate("/partneronboarding");
+  };
 
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
@@ -74,14 +80,14 @@ export default function PartnerDirectory() {
             <input
               type="text"
               placeholder="Search partners by name, location, or specialty..."
-              className="w-full pl-12 pr-4 py-4 bg-white border-0 rounded-lg text-[#333333] placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-#3182CE"
+              className="w-full pl-12 pr-4 py-3.5 bg-white border-0 rounded-lg text-[#333333] placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-#3182CE"
             />
           </div>
           <div className="flex space-x-4">
             {/* Region Select */}
             <div className="relative w-48">
               <select
-                className="appearance-none w-full px-8 py-4 bg-[#30d3b4] text-[#333333] font-medium rounded-lg hover:bg-[#30d3b4] transition-colors whitespace-nowrap pr-10"
+                className="w-full px-2 py-4 bg-white text-[#333333] font-medium rounded-lg transition-colors whitespace-nowrap pr-10"
                 value={selectedRegion}
                 onChange={(e) => setSelectedRegion(e.target.value)}
               >
@@ -95,7 +101,7 @@ export default function PartnerDirectory() {
             {/* Tier Select */}
             <div className="relative w-48">
               <select
-                className="appearance-none w-full px-8 py-4 bg-[#30d3b4] text-[#333333] font-medium rounded-lg hover:bg-[#30d3b4] transition-colors whitespace-nowrap pr-10"
+                className="w-full px-2 py-4 bg-white text-[#333333] font-medium rounded-lg transition-colors whitespace-nowrap pr-10"
                 value={selectedTier}
                 onChange={(e) => setSelectedTier(e.target.value)}
               >
@@ -120,7 +126,10 @@ export default function PartnerDirectory() {
             Join our network and unlock exclusive benefits, training, and
             support
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-[#FFFFFF] font-semibold rounded-xl hover:from-[#3182CE] hover:to-[#805AD5] transition-all shadow-lg">
+          <button
+            onClick={handleOnBoarding}
+            className="px-8 py-4 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-[#FFFFFF] font-semibold rounded-xl hover:from-[#3182CE] hover:to-[#805AD5] transition-all shadow-lg"
+          >
             Start Onboarding
           </button>
         </div>

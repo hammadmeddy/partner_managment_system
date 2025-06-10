@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import { Building2, Settings, Check, Clock, Users } from "lucide-react";
 import {

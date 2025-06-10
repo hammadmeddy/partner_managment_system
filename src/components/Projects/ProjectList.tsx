@@ -1,4 +1,4 @@
-import  React from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface ProjectListProps {
@@ -128,11 +128,14 @@ const ProjectList = ({ filter }: ProjectListProps) => {
     if (filter === "completed") return project.status === "Completed";
     return true; // "all" filter
   });
-const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {filteredProjects.map((project) => (
-        <div key={project.id} className="bg-white rounded-2xl shadow p-6">
+        <div
+          key={project.id}
+          className="bg-white rounded-2xl shadow p-6 flex flex-col h-full"
+        >
           <div className="flex justify-between items-start mb-4">
             <span
               className="px-3 py-1 rounded-full text-xs font-semibold"
@@ -178,7 +181,7 @@ const navigate=useNavigate();
             </div>
           </div>
 
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex justify-between items-center mb-6 flex-grow">
             <div className="flex -space-x-2">
               {project.team.map((member) => (
                 <Avatar
@@ -197,13 +200,13 @@ const navigate=useNavigate();
             <span className="text-black font-semibold">{project.value}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mt-auto">
             <button
               className="text-white py-2 px-4 rounded-lg transition-colors font-semibold"
               style={{
                 backgroundImage: "linear-gradient(to right, #3aeccb, #30d3b4)",
               }}
-              onClick={()=> navigate('/project/details')}
+              onClick={() => navigate("/project/details")}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.filter = "brightness(0.9)")
               }
