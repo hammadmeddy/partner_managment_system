@@ -219,24 +219,7 @@ function App() {
                   </>
                 }
               />
-              <Route
-                path="/user/activate/:token"
-                element={
-                  <>
-                    <PageTitle title="UserActivate" /> <ActivateUser />
-                  </>
-                }
-              />
 
-              <Route
-                path="/2fa"
-                element={
-                  <>
-                    <PageTitle title="TwoFA" />
-                    <TwoFA />
-                  </>
-                }
-              />
               <Route
                 path="/signin"
                 element={
