@@ -1,7 +1,6 @@
 import axios from "../axiosConfig/Axios";
 import { isAxiosError } from "axios";
-import endpoints from "../endpoints/ApiEndpoints";
-import handleTokenRefresh from "../axiosConfig/Axios";
+import endpoints from "../endpoints/ApiEndPoints";
 // Define types for the category and payload
 type payload = any; // You can specify a more specific type
 
@@ -235,30 +234,7 @@ export const editQuestion = async (
   }
 };
 
-// organisation create
-// export const organisationCreate = async (
-//   payload: Payload,
-//   onNavigate: any
-// ): Promise<ApiResponse> => {
-//   try {
-//     const response = await axios.post(endpoints.organisationCreate, payload);
-//     return response.data as ApiResponse;
-//   } catch (error: any) {
-//     if (isAxiosError(error) && error.response?.status === 401) {
-//       await handleTokenRefresh(onNavigate);
-//       try {
-//         const response = await axios.post(endpoints.PostUser, payload);
-//         return response.data as ApiResponse;
-//       } catch (refreshError: any) {
-//         return { success: false, message: refreshError.message };
-//       }
-//     } else {
-//       return { success: false, message: error };
-//     }
-//   }
-// };
-// Assign Role
-//  get user Roles
+
 export const isAdmin = async (onNavigate: any): Promise<ApiResponse> => {
   try {
     const response = await axios.get(endpoints.isAdmin);
