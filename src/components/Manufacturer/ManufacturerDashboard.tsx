@@ -1,5 +1,5 @@
 import React from "react";
-import ManufacturerDashboardCards from "./MAnufacturerDashboardCards";
+import ManufacturerDashboardCards from "./ManufacturerDashboardCards";
 import ManufacturerQuickActions from "./ManufacturerQuickActions";
 import RecentActivity from "./RecentActivity";
 
