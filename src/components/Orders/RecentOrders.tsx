@@ -124,12 +124,7 @@ const RecentOrders = () => {
               </span>
 
               {/* Track Order Button */}
-              <button
-                className="mt-28 px-6 py-2 rounded-xl font-semibold text-[#ffffff]"
-                style={{
-                  backgroundColor: order.buttonColor,
-                }}
-              >
+              <button className="mt-28 px-6 py-2 bg-gradient-to-r from-[#3b82f6] to-[#9333ea] rounded-xl font-semibold text-white">
                 Track Order
               </button>
             </div>

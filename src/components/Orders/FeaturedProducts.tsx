@@ -41,7 +41,7 @@ const products = [
 
 const FeaturedProducts = () => {
   return (
-    <div className="max-w-6xl mx-auto w-[40%] px-4">
+    <div className="max-w-6xl w-full mx-auto lg:w-[40%] px-4">
       <h2 className="text-2xl font-bold text-[#0f172a] mb-6">
         Featured Products
       </h2>

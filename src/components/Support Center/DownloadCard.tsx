@@ -41,7 +41,7 @@ export default function DownloadCard({
       </div>
       <button
         onClick={() => onDownload(title)}
-        className="w-full bg-[#30d3b4] text-white font-semibold py-3 rounded-lg hover:bg-[#30d3b4] transition-colors flex items-center justify-center space-x-2"
+        className="w-full bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center space-x-2"
       >
         <Download className="w-4 h-4" />
         <span>Download</span>

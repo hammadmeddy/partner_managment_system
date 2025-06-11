@@ -24,6 +24,7 @@ export default function Contact() {
         iconColor="#3B82F6"
         iconBgColor="#3B82F620"
         title="Live Chat"
+        description="Chat with our AI assistant or connect to an agent"
         details={
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="w-2 h-2 bg-[#10B981] rounded-full"></div>
@@ -39,6 +40,7 @@ export default function Contact() {
         iconColor="#10B981"
         iconBgColor="#10B98120"
         title="Phone Support"
+        description="Speak directly with our technical team"
         details={
           <>
             <div className="text-[#6B7280] mb-2">+1 (555) 123-4567</div>
@@ -54,6 +56,7 @@ export default function Contact() {
         iconColor="#8B5CF6"
         iconBgColor="#8B5CF620"
         title="Email Support"
+        description="Send us a detailed message"
         details={
           <>
             <div className="text-[#6B7280] mb-2">support@company.com</div>

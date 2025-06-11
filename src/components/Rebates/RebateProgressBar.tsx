@@ -3,7 +3,7 @@ const RebateProgressBar = () => {
     <div className=" mx-auto space-y-6">
       {/* Main Progress Card */}
       <div className="bg-gradient-to-r from-[#2196F3] via-[#1E88E5] to-[#8E24AA] rounded-2xl p-8 text-[#FFFFFF] relative overflow-hidden">
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex md:flex-row flex-col justify-between items-start mb-6">
           <div>
             <h2 className="text-3xl font-bold mb-2">Q1 2024 Progress</h2>
             <p className="text-[#E2E8F0] opacity-90">45 days remaining</p>
@@ -14,7 +14,7 @@ const RebateProgressBar = () => {
         </div>
 
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-3">
+          <div className="flex md:flex-row flex-col justify-between md:items-center mb-3">
             <h3 className="text-xl font-semibold">Sales Progress</h3>
             <span className="text-xl font-bold">$187,500 / $250,000</span>
           </div>
@@ -29,7 +29,7 @@ const RebateProgressBar = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-row md:grid-cols-3 gap-6">
           <div className="bg-[#FFFFFF] bg-opacity-15 backdrop-blur-sm rounded-xl p-4 border border-[#FFFFFF] border-opacity-20">
             <p className="text-#E2E8F0 opacity-90 mb-2">Current Rebate Rate</p>
             <p className="text-3xl font-bold">3.5%</p>

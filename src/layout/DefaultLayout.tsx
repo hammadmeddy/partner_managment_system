@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
@@ -31,10 +31,12 @@ const DefaultLayout = () => {
             </div>
           )}
 
-          {/* Main content area - Adjust margin based on sidebar state */}
+          {/* Main content area - Only adjust margin on large screens */}
           <div
-            className={`flex-1 transition-all duration-300 ease-in-out ${
-              isAuthenticated && sidebarOpen ? "ml-[230px]" : "ml-[80px]"
+            className={`flex-1 lg:transition-all lg:duration-300 lg:ease-in-out ${
+              isAuthenticated && sidebarOpen
+                ? "lg:ml-[230px]"
+                : "lg:ml-[80px] ml-[35px]"
             }`}
           >
             <main className="p-4 md:p-8 2xl:p-8">

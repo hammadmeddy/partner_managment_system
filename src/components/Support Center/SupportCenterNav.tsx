@@ -21,7 +21,7 @@ export default function SupportCenterNav({
             className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-colors ${
               activeTab === tab
                 ? "bg-white text-[#1F2937] shadow-sm"
-                : "text-white hover:bg-[#8E24AA]"
+                : "text-white"
             }`}
           >
             {tab}

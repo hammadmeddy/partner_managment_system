@@ -67,16 +67,19 @@ const UpcomingMilestones = () => {
               <div className="w-full bg-[#F3F4F6] rounded-full h-2">
                 <div
                   className="bg-[#FFFF00] h-2 rounded-full"
-                  style={{ width: `${milestone.progress}%` }}
+                  style={{
+                    backgroundColor: "rgb(250, 204, 21)",
+                    width: `${milestone.progress}%`,
+                  }}
                 ></div>
               </div>
             </div>
 
-            <div className="flex justify-between items-center">
+            <div className="flex md:flex-row flex-col justify-between md:items-center">
               <span className="text-[#10B981] font-bold text-lg">
                 {milestone.bonus}
               </span>
-              <button className="bg-[#FFFF00] text-[#1A1A1A] px-6 py-2 rounded-xl font-medium hover:bg-[#F0F000] transition-colors">
+              <button className="bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-white px-6 py-2 rounded-xl font-medium hover:bg-[#F0F000] transition-colors">
                 View Details
               </button>
             </div>

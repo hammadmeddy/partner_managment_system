@@ -3,7 +3,7 @@ import React from "react";
 
 const OrderHeader = () => {
   return (
-    <div className="flex justify-between items-center mb-8">
+    <div className="flex justify-start lg:flex-row flex-col lg:justify-between lg:items-center mb-8">
       <div>
         <h1 className="text-3xl font-bold text-[#0f172a]">Order Management</h1>
         <p className="text-[#64748b] mt-1">
@@ -11,7 +11,7 @@ const OrderHeader = () => {
         </p>
       </div>
       <button
-        className="bg-[#4f46e5] hover:bg-[#4338ca] text-white px-6 py-3 rounded-xl flex items-center transition-colors duration-200"
+        className="bg-[#4f46e5] mt-2 lg:mt-0 w-52 text-white px-6 py-3 rounded-xl flex items-center transition-colors duration-200"
         style={{
           backgroundImage: "linear-gradient(to right, #4f46e5, #9333ea)",
         }}
@@ -26,7 +26,7 @@ const OrderHeader = () => {
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
-          className="lucide lucide-grid2x2 w-5 h-5 mr-3"
+          className="lucide lucide-grid2x2 w-5 h-5 mr-2 "
         >
           <path d="M12 3v18"></path>
           <path d="M3 12h18"></path>

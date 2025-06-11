@@ -15,7 +15,7 @@ export default function PartnerApprovalItem({
   const getCategoryColor = (category) => {
     switch (category.toLowerCase()) {
       case "system integrator":
-        return "#FFFF00";
+        return "#4299E1";
       case "distributor":
         return "#8B5CF6";
       case "partner":
@@ -42,24 +42,24 @@ export default function PartnerApprovalItem({
             <span>Submitted {date}</span>
           </div>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
           <button
             onClick={() => onReview(company)}
-            className="bg-[#FFFF00] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#E6E600] transition-colors flex items-center space-x-2"
+            className="bg-[#4299E1] text-white px-4 py-2 rounded-lg font-semibold transition-colors w-32 justify-center flex items-center space-x-2"
           >
             <Eye className="w-4 h-4" />
             <span>Review</span>
           </button>
           <button
             onClick={() => onApprove(company)}
-            className="bg-[#10B981] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#059669] transition-colors flex items-center space-x-2"
+            className="bg-[#10B981] text-white px-4 py-2 rounded-lg font-semibold transition-colors w-32 justify-center flex items-center space-x-2"
           >
             <Check className="w-4 h-4" />
             <span>Approve</span>
           </button>
           <button
             onClick={() => onReject(company)}
-            className="bg-[#8B5CF6] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#7C3AED] transition-colors flex items-center space-x-2"
+            className="bg-[#8B5CF6] text-white px-4 py-2 rounded-lg font-semibold transition-colors w-32 justify-center flex items-center space-x-2"
           >
             <X className="w-4 h-4" />
             <span>Reject</span>

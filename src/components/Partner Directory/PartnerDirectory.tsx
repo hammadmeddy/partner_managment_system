@@ -1,4 +1,12 @@
-import { Search, Plus, MapPin, Star, Users } from "lucide-react";
+import {
+  Search,
+  Plus,
+  MapPin,
+  Star,
+  Users,
+  Check,
+  ChevronDown,
+} from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +20,7 @@ export default function PartnerDirectory() {
       specialty: "Specialty: Industrial AI Consulting",
       rating: 3.7,
       projects: 156,
-      avatar: "T",
+      avatar: "🏢",
       tierColor: "#FFD700",
     },
     {
@@ -23,7 +31,7 @@ export default function PartnerDirectory() {
       specialty: "Specialty: Electronic Design Services",
       rating: 4.2,
       projects: 89,
-      avatar: "G",
+      avatar: "🌐",
       tierColor: "#C0C0C0",
     },
     {
@@ -34,31 +42,73 @@ export default function PartnerDirectory() {
       specialty: "Specialty: Digital Vision",
       rating: 4.8,
       projects: 234,
-      avatar: "I",
+      avatar: "💡",
       tierColor: "#FFD700",
     },
   ];
 
-  const [selectedRegion, setSelectedRegion] = useState("");
-  const [selectedTier, setSelectedTier] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("All Regions");
+  const [selectedTier, setSelectedTier] = useState("All Tiers");
 
-  // Filter partners based on selectedRegion and selectedTier
-  const filteredPartners = partners.filter((partner) => {
-    const matchesRegion =
-      !selectedRegion ||
-      selectedRegion === "all" ||
-      partner.location === selectedRegion;
-    const matchesTier =
-      !selectedTier ||
-      selectedTier === "alltiers" ||
-      partner.tier.toLowerCase() === selectedTier.toLowerCase();
-    return matchesRegion && matchesTier;
-  });
+  const regions = ["All Regions", "North America", "Europe", "Asia Pacific"];
+  const tiers = ["All Tiers", "Gold", "Silver", "Registered"];
+
+  const Dropdown = ({ options, selected, setSelected }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => setIsOpen((prev) => !prev);
+    const handleOptionClick = (option) => {
+      setSelected(option);
+      setIsOpen(false);
+    };
+
+    return (
+      <div className="relative w-48">
+        <button
+          onClick={toggleDropdown}
+          className="w-full px-4 py-3 bg-white text-[#333333] font-medium rounded-lg flex justify-between items-center"
+          type="button"
+        >
+          <span>{selected}</span>
+          <ChevronDown className={`transform ${isOpen ? "rotate-180" : ""}`} />
+        </button>
+        {isOpen && (
+          <ul className="absolute w-full bg-white mt-1 rounded-lg shadow-lg z-10">
+            {options.map((option) => (
+              <li
+                key={option}
+                onClick={() => handleOptionClick(option)}
+                className="flex items-center px-4 py-2 hover:bg-gray-100 cursor-pointer"
+              >
+                {selected === option && (
+                  <Check className="mr-2 text-green-500" />
+                )}
+                {option}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    );
+  };
+
   const navigate = useNavigate();
 
   const handleOnBoarding = () => {
     navigate("/partneronboarding");
   };
+
+  const filteredPartners = partners.filter((partner) => {
+    const matchesRegion =
+      !selectedRegion ||
+      selectedRegion === "All Regions" ||
+      partner.location === selectedRegion;
+    const matchesTier =
+      !selectedTier ||
+      selectedTier === "All Tiers" ||
+      partner.tier === selectedTier;
+    return matchesRegion && matchesTier;
+  });
 
   return (
     <div className="min-h-screen bg-[#F5F5F5]">
@@ -74,7 +124,7 @@ export default function PartnerDirectory() {
         </div>
 
         {/* Search and Filters */}
-        <div className="flex gap-3 mb-8">
+        <div className="flex md:flex-row flex-col gap-3 mb-8">
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#666666] w-5 h-5" />
             <input
@@ -84,33 +134,17 @@ export default function PartnerDirectory() {
             />
           </div>
           <div className="flex space-x-4">
-            {/* Region Select */}
-            <div className="relative w-48">
-              <select
-                className="w-full px-2 py-4 bg-white text-[#333333] font-medium rounded-lg transition-colors whitespace-nowrap pr-10"
-                value={selectedRegion}
-                onChange={(e) => setSelectedRegion(e.target.value)}
-              >
-                <option value="">All Regions</option>
-                <option value="North America">North America</option>
-                <option value="Europe">Europe</option>
-                <option value="Asia Pacific">Asia Pacific</option>
-              </select>
-            </div>
-
-            {/* Tier Select */}
-            <div className="relative w-48">
-              <select
-                className="w-full px-2 py-4 bg-white text-[#333333] font-medium rounded-lg transition-colors whitespace-nowrap pr-10"
-                value={selectedTier}
-                onChange={(e) => setSelectedTier(e.target.value)}
-              >
-                <option value="">All Tiers</option>
-                <option value="Gold">Gold</option>
-                <option value="Silver">Silver</option>
-                <option value="Registered">Registered</option>
-              </select>
-            </div>
+            {/* Custom Dropdowns */}
+            <Dropdown
+              options={regions}
+              selected={selectedRegion}
+              setSelected={setSelectedRegion}
+            />
+            <Dropdown
+              options={tiers}
+              selected={selectedTier}
+              setSelected={setSelectedTier}
+            />
           </div>
         </div>
 
@@ -144,7 +178,7 @@ export default function PartnerDirectory() {
               >
                 {/* Partner Header */}
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="w-12 h-12 bg-[#4299E1] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 pb-6 rounded-lg flex items-center justify-center flex-shrink-0">
                     <span className="text-[#FFFFFF] font-bold text-lg">
                       {partner.avatar}
                     </span>
@@ -177,7 +211,7 @@ export default function PartnerDirectory() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-1">
                     <Star className="w-4 h-4 text-[#F6AD55] fill-current" />
-                    <span className="text-#2D3748 font-semibold">
+                    <span className="text-[#2D3748] font-semibold">
                       {partner.rating}
                     </span>
                   </div>
@@ -190,7 +224,7 @@ export default function PartnerDirectory() {
                 </div>
 
                 {/* View Profile Button */}
-                <button className="w-full py-3 bg-[#30d3b4] text-white font-semibold rounded-lg hover:bg-[#30d3b4] transition-colors">
+                <button className="w-full py-3 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-white font-semibold rounded-lg  transition-colors">
                   View Profile
                 </button>
               </div>

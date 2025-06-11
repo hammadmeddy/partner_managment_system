@@ -1,3 +1,5 @@
+"use client";
+
 import type React from "react";
 
 interface ContactCardProps {
@@ -5,6 +7,7 @@ interface ContactCardProps {
   iconColor: string;
   iconBgColor: string;
   title: string;
+  description: string;
   details: React.ReactNode;
   buttonText: string;
   onButtonClick: () => void;
@@ -21,19 +24,21 @@ export default function ContactCard({
   onButtonClick,
 }: ContactCardProps) {
   return (
-    <div className="bg-white rounded-xl p-8 shadow-sm border border-[#E5E7EB] ">
-      <div
-        className="p-4 rounded-full w-16 h-16 mb-4 flex items-start justify-start"
-        style={{ backgroundColor: iconBgColor }}
-      >
-        <IconComponent className="w-8 h-8" style={{ color: iconColor }} />
+    <div className="bg-white rounded-xl p-8 shadow-sm flex flex-col h-full border border-[#E5E7EB]">
+      <div className="flex-grow">
+        <div
+          className="p-4 rounded-full w-16 h-16 mb-4 flex items-center justify-center"
+          style={{ backgroundColor: iconBgColor }}
+        >
+          <IconComponent className="w-8 h-8" style={{ color: iconColor }} />
+        </div>
+        <h3 className="text-xl font-semibold text-[#1F2937] mb-2">{title}</h3>
+        {description}
+        {details}
       </div>
-      <h3 className="text-xl font-semibold text-[#1F2937] mb-2">{title}</h3>
-      {description}
-      {details}
       <button
         onClick={onButtonClick}
-        className="w-full bg-[#30d3b4] text-white font-semibold py-3 rounded-lg hover:bg-[#E6E600] transition-colors"
+        className="w-full mt-6 bg-gradient-to-r from-[#4299E1] to-[#9F7AEA] text-white font-semibold py-3 rounded-lg transition-colors"
       >
         {buttonText}
       </button>

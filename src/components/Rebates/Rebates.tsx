@@ -10,9 +10,9 @@ const Rebates = () => {
     <div className="min-h-screen">
       <RebateHeader />
       <RebateProgressBar />
-      <div className="flex gap-6 mt-8">
+      <div className="flex flex-col lg:flex-row gap-6 mt-8">
         <UpcomingMilestones />{" "}
-        <div className="w-[40%] space-y-4">
+        <div className="lg:w-[40%] space-y-4">
           <SilverTierBenefit /> <RebateRecentHistory />
         </div>
       </div>

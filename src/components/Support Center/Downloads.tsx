@@ -39,13 +39,13 @@ export default function Downloads() {
   return (
     <div className="space-y-6">
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white w-5 h-5" />
+        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black w-5 h-5" />
         <input
           type="text"
           placeholder="Search downloads..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full bg-[#30d3b4] text-white placeholder-white px-12 py-4 rounded-xl text-lg font-medium"
+          className="w-full bg-white text-black placeholder-black px-12 py-4 rounded-xl text-lg font-sm"
         />
       </div>
 
