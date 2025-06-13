@@ -1,5 +1,3 @@
-"use client";
-
 import { X, Calendar, DollarSign, Building2 } from "lucide-react";
 import React from "react";
 import { useState } from "react";
@@ -58,7 +56,7 @@ const NewProjectModal: React.FC<NewProjectModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-[#e5e7eb]">
           <div>
             <h2 className="text-2xl font-bold text-[#0f172a]">
               Create New Project

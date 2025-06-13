@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Search, Plus } from "lucide-react";
 import UserRow from "./UserRow";
+import UserModal from "./UserModal";
 
 export default function UserManagement() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,10 +34,7 @@ export default function UserManagement() {
       date: "2024-01-13",
     },
   ];
-
-  const handleAddUser = () => {
-    console.log("Adding new user");
-  };
+  const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <div>
@@ -56,11 +54,15 @@ export default function UserManagement() {
             />
           </div>
           <button
-            onClick={handleAddUser}
+            onClick={() => setModalOpen(true)}
             className="bg-[#30d3b4] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#30d3b4] transition-colors flex items-center space-x-2"
           >
             <Plus className="w-4 h-4" />
             <span>Add User</span>
+            <UserModal
+              isOpen={isModalOpen}
+              onClose={() => setModalOpen(false)}
+            />
           </button>
         </div>
       </div>
